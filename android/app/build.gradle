@@ -129,8 +129,6 @@ android {
     }
 
     defaultConfig {
-        missingDimensionStrategy 'react-native-camera', 'general' <-- insert this line
-        
         applicationId "com.allergikollen"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
