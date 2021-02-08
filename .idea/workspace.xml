@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ad1050b-1142-4d0c-a9ba-a3a21933d061" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,14 +45,14 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="317" y="176" key="#PSD/0.0.1600.860@0.0.1600.860" timestamp="1612804020859" />
-    <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612804024926">
+    <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612818747484">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1612804024926" />
-    <state x="100" y="100" width="1400" height="660" key="AVDManager" timestamp="1612807735563">
+    <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1612818747484" />
+    <state x="100" y="100" width="1400" height="660" key="AVDManager" timestamp="1612818867093">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="100" y="100" width="1400" height="660" key="AVDManager/0.0.1600.860@0.0.1600.860" timestamp="1612807735563" />
+    <state x="100" y="100" width="1400" height="660" key="AVDManager/0.0.1600.860@0.0.1600.860" timestamp="1612818867093" />
     <state x="301" y="75" key="SettingsEditor" timestamp="1612807377453">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

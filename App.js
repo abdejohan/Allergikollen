@@ -1,12 +1,17 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Button } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import Scanner from "./components/Scanner";
 
 export default function App() {
+  const [mainView, setMainView] = useState();
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Button title={"Tap to Scan"} onPress={() => setMainView("scanner")} />
+      <Button title={"Tap to test"} onPress={() => setMainView("test")} />
+      {mainView == "scanner" && <Scanner />}
+      {mainView == "test" && alert("test")}
     </View>
   );
 }
@@ -14,8 +19,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    flexDirection: "column",
     justifyContent: "center",
   },
 });
