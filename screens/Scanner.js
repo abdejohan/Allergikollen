@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { TextInput } from "react-native-gesture-handler";
 
 export default function Scanner() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -9,7 +10,8 @@ export default function Scanner() {
   const [containsAllergen, setContainsAllergen] = useState([]);
   const [mayContain, setMayContain] = useState([]);
 
-  let allergen = ["Vete", "gluten", "Sojabönor"];
+  const [newAllergen, setNewAllergen] = useState("");
+  const [allergen, setAllergen] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -18,9 +20,11 @@ export default function Scanner() {
     })();
   }, []);
 
+  /* this function loops over the allergen array and checks if any of the chosen allergens is included in the api response.
+  If it is, the matching allergen is added to a new vaiable and displayed in the view. */
   const fetchItemInfo = async (barCode) => {
     await fetch(
-      `https://api.dabas.com/DABASService/V2/article/gtin/0${barCode}/JSON?&apikey=enterApiCodeHere`
+      `https://api.dabas.com/DABASService/V2/article/gtin/0${barCode}/JSON?&apikey=insertApiKeyHere`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -66,8 +70,23 @@ export default function Scanner() {
   };
 
   const showAllergen = (arr) => {
-    return arr.join(", ");
+    if (arr[0]) {
+      return arr.join(", ");
+    }
   };
+
+  /* Add new allergen */
+  const handleTextChange = (event) => {
+    setNewAllergen(event);
+  };
+  const addNewAllergen = () => {
+    if (!newAllergen) {
+      return;
+    }
+    setAllergen((allergen) => [...allergen, newAllergen]);
+    setNewAllergen("");
+  };
+  /* ***************** */
 
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
@@ -78,6 +97,13 @@ export default function Scanner() {
 
   return (
     <View style={styles.container}>
+      <TextInput
+        style={{ backgroundColor: "grey", width: 100, height: 40 }}
+        value={newAllergen}
+        onChangeText={(event) => handleTextChange(event)}
+      ></TextInput>
+      <Button title="add" onPress={addNewAllergen}></Button>
+      <Text>{showAllergen(allergen)}</Text>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={styles.scanner}
