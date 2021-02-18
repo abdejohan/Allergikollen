@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
   danger: {
     ...Typography.fontSize.x60,
     backgroundColor: Colors.danger.color,
-    fontStyle: 38,
   },
 });
 

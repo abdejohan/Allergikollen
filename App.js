@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { MaterialIcons } from "@expo/vector-icons";
 
 // Screens
 import Home from "./screens/Home";
@@ -24,10 +27,48 @@ const App = () => {
       ) : (
         <>
           <NavigationContainer>
-            <Tab.Navigator>
-              <Tab.Screen name="Home" component={Home} />
-              <Tab.Screen name="Scan" component={Scanner} />
-              <Tab.Screen name="Report" component={Report} />
+            <Tab.Navigator
+              shifting={true}
+              initialRouteName="Home"
+              activeColor="black"
+              inactiveColor="grey"
+              barStyle={{ backgroundColor: "white" }}
+            >
+              <Tab.Screen
+                name="Home"
+                component={Home}
+                options={{
+                  tabBarLabel: "Hem",
+                  tabBarIcon: () => (
+                    <AntDesign name="home" size={24} color="black" />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Scan"
+                component={Scanner}
+                options={{
+                  tabBarBadge: true,
+                  tabBarLabel: "Scanner",
+                  tabBarIcon: () => (
+                    <Ionicons name="barcode-outline" size={24} color="black" />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Report"
+                component={Report}
+                options={{
+                  tabBarLabel: "Support",
+                  tabBarIcon: () => (
+                    <MaterialIcons
+                      name="support-agent"
+                      size={24}
+                      color="black"
+                    />
+                  ),
+                }}
+              />
             </Tab.Navigator>
           </NavigationContainer>
         </>
