@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { TextInput } from "react-native-gesture-handler";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default function Scanner() {
+export default function Scanner(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [barCodeInfo, setBarCodeInfo] = useState(null);
@@ -11,7 +12,8 @@ export default function Scanner() {
   const [mayContain, setMayContain] = useState([]);
 
   const [newAllergen, setNewAllergen] = useState("");
-  const [allergen, setAllergen] = useState([]);
+  /*const [allergen, setAllergen] = useState([]);*/
+  const allergen = props.selectedAllergens;
 
   useEffect(() => {
     (async () => {
@@ -24,7 +26,7 @@ export default function Scanner() {
   If it is, the matching allergen is added to a new vaiable and displayed in the view. */
   const fetchItemInfo = async (barCode) => {
     await fetch(
-      `https://api.dabas.com/DABASService/V2/article/gtin/0${barCode}/JSON?&apikey=insertApiKeyHere`
+      `https://api.dabas.com/DABASService/V2/article/gtin/0${barCode}/JSON?&apikey=enterApiKeyHere`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -71,7 +73,13 @@ export default function Scanner() {
 
   const showAllergen = (arr) => {
     if (arr[0]) {
-      return arr.join(", ");
+      return arr.map((item) => {
+        return (
+          <Text key={item}>
+            <MaterialIcons name="warning" size={24} color="red" /> {item}
+          </Text>
+        );
+      });
     }
   };
 
@@ -97,6 +105,7 @@ export default function Scanner() {
 
   return (
     <View style={styles.container}>
+      {/*
       <TextInput
         style={{ backgroundColor: "grey", width: 100, height: 40 }}
         value={newAllergen}
@@ -104,6 +113,7 @@ export default function Scanner() {
       ></TextInput>
       <Button title="add" onPress={addNewAllergen}></Button>
       <Text>{showAllergen(allergen)}</Text>
+      */}
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={styles.scanner}
@@ -112,10 +122,20 @@ export default function Scanner() {
         <Button title={"Tap to Scan Again"} onPress={() => scanAgain()} />
       )}
       {containsAllergen[0] && scanned && (
-        <Text>This product contains {showAllergen(containsAllergen)}</Text>
+        <View>
+          <Text>This product contains:</Text>
+          <View style={{ display: "flex", flexDirection: "column" }}>
+            {showAllergen(containsAllergen)}
+          </View>
+        </View>
       )}
       {mayContain[0] && scanned && (
-        <Text>This product may contain {showAllergen(mayContain)}</Text>
+        <View>
+          <Text>This product may contain:</Text>
+          <View style={{ display: "flex", flexDirection: "column" }}>
+            {showAllergen(mayContain)}
+          </View>
+        </View>
       )}
     </View>
   );
