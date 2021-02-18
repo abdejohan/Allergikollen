@@ -12,6 +12,7 @@ import IntroPage from "./screens/IntroPage";
 import Scanner from "./screens/Scanner";
 import Report from "./screens/Report";
 import Livsmedelsverket from "./screens/Livsmedelsverket";
+import Settings from "./screens/Settings";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -20,6 +21,14 @@ const App = () => {
   setTimeout(function () {
     setLoaded("loaded");
   }, 10);
+
+  const [selectedAllergens, setSelectedAllergens] = useState([]);
+  const deleteAllergen = (allergen) => {
+    const newArray = selectedAllergens.filter((e) => e !== allergen);
+    console.log(newArray);
+    setSelectedAllergens(newArray);
+  };
+
   return (
     <>
       {!loaded ? (
@@ -46,7 +55,10 @@ const App = () => {
               />
               <Tab.Screen
                 name="Scan"
-                component={Scanner}
+                children={() => (
+                  <Scanner selectedAllergens={selectedAllergens} />
+                )}
+                /*component={Scanner}*/
                 options={{
                   tabBarBadge: true,
                   tabBarLabel: "Scanner",
@@ -66,6 +78,25 @@ const App = () => {
                       size={24}
                       color="black"
                     />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Settings"
+                children={() => (
+                  <Settings
+                    selectedAllergens={selectedAllergens}
+                    setSelectedAllergens={setSelectedAllergens}
+                    deleteAllergen={deleteAllergen}
+                  />
+                )}
+                /*component={Settings}*/
+                options={{
+                  selectedAllergens: { selectedAllergens },
+                  setSelectedAllergens: { setSelectedAllergens },
+                  tabBarLabel: "Settings",
+                  tabBarIcon: () => (
+                    <MaterialIcons name="settings" size={24} color="black" />
                   ),
                 }}
               />
