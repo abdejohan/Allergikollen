@@ -4,12 +4,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import NestedScreen from "./screens/NestedScreen";
 import Home from "./screens/Home";
-import NewScanner from "./screens/NewScanner";
+import ProductScreen from "./screens/ProductScreen";
+import OpenScanner from "./screens/OpenScanner";
+import ScannerPage from "./screens/ScannerPage";
 import Report from "./screens/Report";
 
-const Stack = createStackNavigator(); // creates object for Stack Navigator
+const Stack = createStackNavigator();
 
-const FirstScreenNavigator = () => {
+const HomeScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
@@ -18,20 +20,21 @@ const FirstScreenNavigator = () => {
   );
 };
 
-export { FirstScreenNavigator }; // Stack-Navigator for Screen 1 Tab
+export { HomeScreenNavigator };
 
-const SecondScreenNavigator = () => {
+const ScannerScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="NewScanner" component={NewScanner} />
-      <Stack.Screen name="NestedNewScanner" component={NestedScreen} />
+      <Stack.Screen name="ScannerPage" component={ScannerPage} />
+      <Stack.Screen name="ProductScreen" component={ProductScreen} />
+      <Stack.Screen name="OpenScanner" component={OpenScanner} />
     </Stack.Navigator>
   );
 };
 
-export { SecondScreenNavigator }; // Stack-Navigator for Screen 2 Tab
+export { ScannerScreenNavigator }; //
 
-const ThirdScreenNavigator = () => {
+const ReportScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Report" component={Report} />
@@ -40,4 +43,4 @@ const ThirdScreenNavigator = () => {
   );
 };
 
-export { ThirdScreenNavigator }; // Stack-Navigator for Screen 3 Tab
+export { ReportScreenNavigator };

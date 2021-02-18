@@ -7,7 +7,7 @@ import { Dimensions } from "react-native";
 const { width } = Dimensions.get("window");
 const qrSize = width * 0.7;
 
-const NewScanner = ({ navigation }) => {
+const OpenScanner = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -20,7 +20,8 @@ const NewScanner = ({ navigation }) => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    navigation.navigate("ProductScreen", { data });
+    //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {
@@ -44,20 +45,6 @@ const NewScanner = ({ navigation }) => {
       >
         <Text style={styles.description}>Scanna en produkt</Text>
         <View style={styles.qr}></View>
-        <Text
-          onPress={() => alert("Navigate back from here")}
-          style={styles.cancel}
-        >
-          Tillbaka
-        </Text>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("NestedNewScanner", { msg: "From Screen 2" })
-          }
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Click Me!</Text>
-        </TouchableOpacity>
       </BarCodeScanner>
       {scanned && (
         <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
@@ -108,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NewScanner;
+export default OpenScanner;

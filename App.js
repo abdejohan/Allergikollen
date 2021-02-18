@@ -4,14 +4,16 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { Ionicons } from "@expo/vector-icons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { MaterialIcons } from "@expo/vector-icons";
+import { API_URL, API_TOKEN } from "@env";
+console.log(API_TOKEN);
 
 // these handle screens for both bottom and top navigation
 import Settings from "./screens/Settings";
 import IntroPage from "./screens/IntroPage";
 import {
-  FirstScreenNavigator,
-  SecondScreenNavigator,
-  ThirdScreenNavigator,
+  HomeScreenNavigator,
+  ScannerScreenNavigator,
+  ReportScreenNavigator,
 } from "./CustomNavigation";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -45,7 +47,7 @@ const App = () => {
             >
               <Tab.Screen
                 name="Home"
-                component={FirstScreenNavigator}
+                component={HomeScreenNavigator}
                 options={{
                   tabBarLabel: "Hem",
                   tabBarIcon: () => (
@@ -55,10 +57,10 @@ const App = () => {
               />
               <Tab.Screen
                 name="Scan"
-                component={SecondScreenNavigator}
+                component={ScannerScreenNavigator}
                 options={{
                   tabBarBadge: true,
-                  tabBarLabel: "NewScanner",
+                  tabBarLabel: "ScannerPage",
                   tabBarIcon: () => (
                     <Ionicons name="barcode-outline" size={24} color="black" />
                   ),
@@ -66,7 +68,7 @@ const App = () => {
               />
               <Tab.Screen
                 name="Report"
-                component={ThirdScreenNavigator}
+                component={ReportScreenNavigator}
                 options={{
                   tabBarLabel: "Support",
                   tabBarIcon: () => (
