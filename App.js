@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { MaterialIcons } from "@expo/vector-icons";
 
-// Screens
-import Home from "./screens/Home";
-import IntroPage from "./screens/IntroPage";
-import Scanner from "./screens/Scanner";
-import Report from "./screens/Report";
-import Livsmedelsverket from "./screens/Livsmedelsverket";
+// these handle screens for both bottom and top navigation
 import Settings from "./screens/Settings";
+import IntroPage from "./screens/IntroPage";
+import {
+  FirstScreenNavigator,
+  SecondScreenNavigator,
+  ThirdScreenNavigator,
+} from "./CustomNavigation";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -45,7 +45,7 @@ const App = () => {
             >
               <Tab.Screen
                 name="Home"
-                component={Home}
+                component={FirstScreenNavigator}
                 options={{
                   tabBarLabel: "Hem",
                   tabBarIcon: () => (
@@ -55,13 +55,10 @@ const App = () => {
               />
               <Tab.Screen
                 name="Scan"
-                children={() => (
-                  <Scanner selectedAllergens={selectedAllergens} />
-                )}
-                /*component={Scanner}*/
+                component={SecondScreenNavigator}
                 options={{
                   tabBarBadge: true,
-                  tabBarLabel: "Scanner",
+                  tabBarLabel: "NewScanner",
                   tabBarIcon: () => (
                     <Ionicons name="barcode-outline" size={24} color="black" />
                   ),
@@ -69,7 +66,7 @@ const App = () => {
               />
               <Tab.Screen
                 name="Report"
-                component={Report}
+                component={ThirdScreenNavigator}
                 options={{
                   tabBarLabel: "Support",
                   tabBarIcon: () => (
@@ -90,7 +87,6 @@ const App = () => {
                     deleteAllergen={deleteAllergen}
                   />
                 )}
-                /*component={Settings}*/
                 options={{
                   selectedAllergens: { selectedAllergens },
                   setSelectedAllergens: { setSelectedAllergens },
