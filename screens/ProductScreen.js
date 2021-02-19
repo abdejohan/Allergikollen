@@ -17,8 +17,18 @@ const ProductScreen = ({ route }) => {
           },
         })
         .then((res) => {
-          const response = res.data.Produktkod;
-          setProduct({});
+          const response = res.data;
+          console.log({
+            varumarke: response.Varumarke.Varumarke,
+            tillverkare: response.Varumarke.Tillverkare.Namn,
+            bilder: response.Bilder[0].Lank,
+            Tillverkningslander: response.Tillverkningslander[0].Land,
+            Allergener: response.Allergener,
+            Ingredienser: response.Ingredienser,
+            Artikelbenamning: response.Artikelbenamning,
+            HuvudgruppBenamning: response.Varugrupp.HuvudgruppBenamning,
+            Ingrediensforteckning: response.Ingrediensforteckning,
+          });
         });
     } catch (error) {
       alert(`ERROR MESSAGE: ${error}`);

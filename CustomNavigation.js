@@ -1,7 +1,7 @@
 import React from "react";
-
 import { createStackNavigator } from "@react-navigation/stack";
 
+// Pages and Screens
 import NestedScreen from "./screens/NestedScreen";
 import Home from "./pages/Home";
 import ProductScreen from "./screens/ProductScreen";
