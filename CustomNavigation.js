@@ -3,11 +3,11 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import NestedScreen from "./screens/NestedScreen";
-import Home from "./screens/Home";
+import Home from "./pages/Home";
 import ProductScreen from "./screens/ProductScreen";
 import OpenScanner from "./screens/OpenScanner";
-import ScannerPage from "./screens/ScannerPage";
-import Report from "./screens/Report";
+import ScannerPage from "./pages/ScannerPage";
+import Report from "./pages/Report";
 
 const Stack = createStackNavigator();
 

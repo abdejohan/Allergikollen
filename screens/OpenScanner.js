@@ -20,7 +20,7 @@ const OpenScanner = ({ navigation }) => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    navigation.navigate("ProductScreen", { data });
+    navigation.navigate("ProductScreen", { qrcode: data });
     //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 

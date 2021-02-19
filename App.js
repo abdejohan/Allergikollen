@@ -4,11 +4,11 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { Ionicons } from "@expo/vector-icons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { MaterialIcons } from "@expo/vector-icons";
-import { ApplicationProvider, Layout, Text } from "@ui-kitten/components";
+import { ApplicationProvider } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 
 // these handle screens for both bottom and top navigation
-import Settings from "./screens/Settings";
+import Settings from "./pages/Settings";
 import IntroPage from "./screens/IntroPage";
 import {
   HomeScreenNavigator,

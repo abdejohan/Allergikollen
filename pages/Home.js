@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
-import { ApplicationProvider, Layout, Text } from "@ui-kitten/components";
+import { Layout, Text } from "@ui-kitten/components";
+import axios from "axios";
 
 const Home = ({ navigation }) => {
   return (
