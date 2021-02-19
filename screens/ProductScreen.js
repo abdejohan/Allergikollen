@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Text } from "@ui-kitten/components";
+import { Image, StyleSheet } from "react-native";
+
 import { API_KEY } from "@env";
 import axios from "axios";
 
@@ -18,18 +20,19 @@ const ProductScreen = ({ route }) => {
         })
         .then((res) => {
           const response = res.data;
-          console.log({
+          setProduct({
             varumarke: response.Varumarke.Varumarke,
             tillverkare: response.Varumarke.Tillverkare.Namn,
-            bilder: response.Bilder[0].Lank,
-            Tillverkningslander: response.Tillverkningslander[0].Land,
-            Allergener: response.Allergener,
+            img: response.Bilder[0].Lank,
+            tillverkningslander: response.Tillverkningslander[0].Land,
+            allergener: response.Allergener,
             Ingredienser: response.Ingredienser,
-            Artikelbenamning: response.Artikelbenamning,
-            HuvudgruppBenamning: response.Varugrupp.HuvudgruppBenamning,
-            Ingrediensforteckning: response.Ingrediensforteckning,
+            artikelbenamning: response.Artikelbenamning,
+            huvudgruppBenamning: response.Varugrupp.HuvudgruppBenamning,
+            ingrediensforteckning: response.Ingrediensforteckning,
           });
         });
+      console.log(product);
     } catch (error) {
       alert(`ERROR MESSAGE: ${error}`);
       console.log(`ERROR MESSAGE: ${error}`);
@@ -42,11 +45,23 @@ const ProductScreen = ({ route }) => {
 
   return (
     <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text category="h2">{product.artikelbenamning}</Text>
-      <Text category="s1">{product.Varumarke} </Text>
-      <Text> {JSON.stringify(product)} </Text>
+      <Text category="c2">{product.varumarke}</Text>
+      <Text category="h4">{product.tillverkare}</Text>
+      <Text category="c2">{product.artikelbenamning}</Text>
+      <Text category="c1">{product.tillverkningslander}</Text>
+      <Image source={{ url: product.img }} style={styles.img1} />
     </Layout>
   );
 };
+
+const styles = StyleSheet.create({
+  img1: {
+    marginTop: 30,
+    width: 200,
+    height: 200,
+    borderWidth: 2,
+    borderColor: "green",
+  },
+});
 
 export default ProductScreen;
