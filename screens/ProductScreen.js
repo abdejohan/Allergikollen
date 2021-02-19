@@ -5,38 +5,32 @@ import { Image, StyleSheet } from "react-native";
 import { API_KEY } from "@env";
 import axios from "axios";
 
-const ProductScreen = ({ route }) => {
+const ProductScreen = ({ route, navigation }) => {
   const QRCODE = route.params.qrcode; // This data comes from the Scanner Page.
   const [product, setProduct] = useState({});
   const API_URL = `https://api.dabas.com/DABASService/V2/article/gtin/0${QRCODE}/JSON?apikey=${API_KEY}`;
 
   const fetchProduct = async () => {
     try {
-      await axios
-        .get(API_URL, {
-          headers: {
-            "Access-Control-Allow-Origin": "85.224.48.210",
-          },
-        })
-        .then((res) => {
-          const response = res.data;
-          if (Object.keys(response).length > 0) {
-            setProduct({
-              varumarke: response.Varumarke.Varumarke,
-              tillverkare: response.Varumarke.Tillverkare.Namn,
-              img: response.Bilder[0].Lank,
-              tillverkningslander: response.Tillverkningslander[0].Land,
-              allergener: response.Allergener,
-              Ingredienser: response.Ingredienser,
-              artikelbenamning: response.Artikelbenamning,
-              huvudgruppBenamning: response.Varugrupp.HuvudgruppBenamning,
-              ingrediensforteckning: response.Ingrediensforteckning,
-            });
-          } else {
-            setProduct({});
-          }
-          console.log("response" + response);
-        });
+      await axios.get(API_URL).then((res) => {
+        const response = res.data;
+        if (Object.keys(response).length > 0) {
+          setProduct({
+            varumarke: response.Varumarke.Varumarke,
+            tillverkare: response.Varumarke.Tillverkare.Namn,
+            img: response.Bilder[0].Lank,
+            tillverkningslander: response.Tillverkningslander[0].Land,
+            allergener: response.Allergener,
+            Ingredienser: response.Ingredienser,
+            artikelbenamning: response.Artikelbenamning,
+            huvudgruppBenamning: response.Varugrupp.HuvudgruppBenamning,
+            ingrediensforteckning: response.Ingrediensforteckning,
+          });
+        } else {
+          setProduct({});
+        }
+        console.log("response" + response);
+      });
       console.log(product);
     } catch (error) {
       alert(`ERROR MESSAGE: ${error}`);
@@ -57,7 +51,9 @@ const ProductScreen = ({ route }) => {
           <Text category="c2">{product.artikelbenamning}</Text>
           <Text category="c1">{product.tillverkningslander}</Text>
           <Image source={{ url: product.img }} style={styles.img1} />
-          <Button onPress={() => alert("button pressed")}>BUTTON</Button>
+          <Button onPress={() => navigation.navigate("OpenScanner")}>
+            Fortsätt Scanna!
+          </Button>
         </>
       ) : (
         <>
@@ -66,7 +62,7 @@ const ProductScreen = ({ route }) => {
             Produkten du har scannat verkar inte finnas hos oss.
           </Text>
           <Button onPress={() => alert("button pressed")}>
-            Hjälp oss lägg till den!
+            Hjälp oss lägga till den!
           </Button>
         </>
       )}

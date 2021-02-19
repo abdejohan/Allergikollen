@@ -21,6 +21,7 @@ const OpenScanner = ({ navigation }) => {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     navigation.navigate("ProductScreen", { qrcode: data });
+    setScanned(false);
     //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
@@ -46,9 +47,6 @@ const OpenScanner = ({ navigation }) => {
         <Text style={styles.description}>Scanna en produkt</Text>
         <View style={styles.qr}></View>
       </BarCodeScanner>
-      {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
-      )}
     </View>
   );
 };
