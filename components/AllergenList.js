@@ -57,7 +57,6 @@ const AllergenList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row nowrap",
     minWidth: 330,
     flex: 1,
     borderColor: "black",
@@ -69,15 +68,12 @@ const styles = StyleSheet.create({
     width: 230,
     marginBottom: 2,
   },
-  layout: {
-    flexDirection: "row nowrap",
-  },
+  layout: {},
   button: {
     top: 12,
     position: "absolute",
     right: 8,
     height: 33,
-    minHeight: "offset",
   },
 });
 

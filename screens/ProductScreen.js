@@ -6,7 +6,7 @@ import { API_KEY } from "@env";
 import axios from "axios";
 
 const ProductScreen = ({ route, navigation }) => {
-  const QRCODE = route.params.qrcode; // This data comes from the Scanner Page.
+  const QRCODE = route.params.qrcode;
   const [product, setProduct] = useState({});
   const API_URL = `https://api.dabas.com/DABASService/V2/article/gtin/0${QRCODE}/JSON?apikey=${API_KEY}`;
 
@@ -29,7 +29,6 @@ const ProductScreen = ({ route, navigation }) => {
         } else {
           setProduct({});
         }
-        console.log("response" + response);
       });
       console.log(product);
     } catch (error) {
