@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native";
 import { Layout, Text, Button } from "@ui-kitten/components";
 
 // components
-import KittyList from "../components/KittyList";
+import AllergenList from "../components/AllergenList";
 
 const IntroPage = ({ navigation }) => {
   return (
     <Layout style={styles.layout}>
       <Text category="h1"> SCANNER PAGE </Text>
-      <KittyList />
+      <AllergenList />
       <Button
         style={styles.button}
         onPress={() => navigation.navigate("OpenScanner")}

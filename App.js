@@ -42,7 +42,7 @@ const App = () => {
           <NavigationContainer>
             <Tab.Navigator
               shifting={true}
-              initialRouteName="Home"
+              initialRouteName="Scan"
               activeColor="black"
               inactiveColor="grey"
               barStyle={{ backgroundColor: "white" }}

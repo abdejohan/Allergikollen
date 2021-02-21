@@ -15,18 +15,14 @@ const data = [
     title: "Fisk",
     description: "Flaggar för: Fisk/Skaldjur",
   },
+  {
+    title: "Soja",
+    description: "Flaggar för: Soja, SojaBönor, SojaPulver",
+  },
 ];
 
-const KittyList = () => {
+const AllergenList = () => {
   const [removeItem, setRemoveItem] = useState(null);
-  const renderItemAccessory = () => (
-    <Button
-      onPress={(data) => {
-        console.log(data);
-      }}
-      size="tiny"
-    ></Button>
-  );
 
   const renderItemIcon = (props) => <Icon {...props} name="person" />;
 
@@ -34,15 +30,14 @@ const KittyList = () => {
     <Layout>
       <ListItem
         style={styles.listItem}
-        title={`${item.title} ${index}`}
-        description={`${item.description} ${index}`}
+        title={item.title}
+        description={item.description}
         accessoryLeft={renderItemIcon}
       />
       <Button
         style={styles.button}
         onPress={() => {
           setRemoveItem(index);
-          console.log("this button has the index of: " + index);
         }}
       >
         Ta bort
@@ -63,14 +58,13 @@ const KittyList = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row nowrap",
-    maxHeight: 192,
     minWidth: 400,
     borderColor: "black",
-    borderWidth: 2,
-    paddingTop: 2,
+    backgroundColor: "white",
   },
   listItem: {
-    backgroundColor: "#C1CAD6",
+    backgroundColor: "rgba(219,211,173, 0.1)",
+    borderRadius: 10,
     marginBottom: 2,
   },
   layout: {
@@ -85,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default KittyList;
+export default AllergenList;
