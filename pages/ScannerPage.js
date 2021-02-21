@@ -1,32 +1,35 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Layout, Text, Button } from "@ui-kitten/components";
+
+// components
+import KittyList from "../components/KittyList";
 
 const IntroPage = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text> SCANNER PAGE </Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("OpenScanner")}
+    <Layout style={styles.layout}>
+      <Text category="h1"> SCANNER PAGE </Text>
+      <KittyList />
+      <Button
         style={styles.button}
+        onPress={() => navigation.navigate("OpenScanner")}
       >
-        <Text style={styles.buttonText}>Click Me!</Text>
-      </TouchableOpacity>
-    </View>
+        Scanna
+      </Button>
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  layout: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#ecf0f1",
-    padding: 8,
+    paddingTop: 10,
   },
   button: {
-    backgroundColor: "#0275d8",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
+    position: "absolute",
+    bottom: 20,
   },
 });
 
