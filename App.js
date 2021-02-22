@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { MaterialIcons } from "@expo/vector-icons";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import * as eva from "@eva-design/eva";
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
 
-// Screens
-import Home from "./screens/Home";
+// these handle screens for both bottom and top navigation
+import Settings from "./pages/Settings";
 import IntroPage from "./screens/IntroPage";
-import Scanner from "./screens/Scanner";
-import Report from "./screens/Report";
-import Livsmedelsverket from "./screens/Livsmedelsverket";
-import Settings from "./screens/Settings";
+import {
+  HomeScreenNavigator,
+  ScannerScreenNavigator,
+  ReportScreenNavigator,
+} from "./CustomNavigation";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -31,21 +34,22 @@ const App = () => {
 
   return (
     <>
-      {!loaded ? (
-        <IntroPage />
-      ) : (
-        <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        {!loaded ? (
+          <IntroPage />
+        ) : (
           <NavigationContainer>
             <Tab.Navigator
               shifting={true}
-              initialRouteName="Home"
+              initialRouteName="Scan"
               activeColor="black"
               inactiveColor="grey"
               barStyle={{ backgroundColor: "white" }}
             >
               <Tab.Screen
                 name="Home"
-                component={Home}
+                component={HomeScreenNavigator}
                 options={{
                   tabBarLabel: "Hem",
                   tabBarIcon: () => (
@@ -55,13 +59,10 @@ const App = () => {
               />
               <Tab.Screen
                 name="Scan"
-                children={() => (
-                  <Scanner selectedAllergens={selectedAllergens} />
-                )}
-                /*component={Scanner}*/
+                component={ScannerScreenNavigator}
                 options={{
                   tabBarBadge: true,
-                  tabBarLabel: "Scanner",
+                  tabBarLabel: "ScannerPage",
                   tabBarIcon: () => (
                     <Ionicons name="barcode-outline" size={24} color="black" />
                   ),
@@ -69,7 +70,7 @@ const App = () => {
               />
               <Tab.Screen
                 name="Report"
-                component={Report}
+                component={ReportScreenNavigator}
                 options={{
                   tabBarLabel: "Support",
                   tabBarIcon: () => (
@@ -90,7 +91,6 @@ const App = () => {
                     deleteAllergen={deleteAllergen}
                   />
                 )}
-                /*component={Settings}*/
                 options={{
                   selectedAllergens: { selectedAllergens },
                   setSelectedAllergens: { setSelectedAllergens },
@@ -102,8 +102,8 @@ const App = () => {
               />
             </Tab.Navigator>
           </NavigationContainer>
-        </>
-      )}
+        )}
+      </ApplicationProvider>
     </>
   );
 };
