@@ -1,7 +1,8 @@
 export const Screen = {
   flex: 1,
-  justifyContent: "center",
+  justifyContent: "flex-start",
   alignItems: "center",
+  paddingTop: 20,
 };
 
 export const listButton = {
