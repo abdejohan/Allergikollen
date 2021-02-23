@@ -1,6 +1,10 @@
-import * as Sizing from "./sizing";
-import * as Typography from "./typography";
+export const Screen = {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+};
 
-export const prim = {
-  backgroundColor: "pink",
+export const listButton = {
+  backgroundColor: "lightgrey",
+  borderColor: "grey",
 };

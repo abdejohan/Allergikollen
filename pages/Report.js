@@ -1,14 +1,14 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text, Button } from "@ui-kitten/components";
-import { Buttons, Sizing, Typography } from "../styles/index";
+import { Buttons } from "../styles/index";
 
 const Report = ({ navigation }) => {
   return (
-    <Layout style={styles.container}>
+    <Layout level="2" style={Buttons.Screen}>
       <Text>HÄR ÄR REPORT SIDAN</Text>
       <Button
-        style={Buttons.prim}
+        style={Buttons.listButton}
         onPress={() => {
           alert("here");
         }}
@@ -18,7 +18,5 @@ const Report = ({ navigation }) => {
     </Layout>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default Report;
