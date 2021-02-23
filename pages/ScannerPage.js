@@ -4,12 +4,14 @@ import { Layout, Text, Button } from "@ui-kitten/components";
 
 // components
 import AllergenList from "../components/AllergenList";
+import QrSearchManually from "../components/QrSearchManually";
 
 const IntroPage = ({ navigation }) => {
   return (
     <Layout style={styles.layout}>
       <Text category="h1"> SCANNER PAGE </Text>
       <AllergenList />
+      <QrSearchManually />
       <Button
         style={styles.button}
         onPress={() => navigation.navigate("OpenScanner")}
@@ -28,8 +30,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   button: {
-    position: "absolute",
-    bottom: 20,
+    marginBottom: 50,
   },
 });
 

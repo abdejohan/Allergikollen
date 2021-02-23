@@ -12,12 +12,12 @@ const data = [
     description: "Flaggar för: Mjölk",
   },
   {
-    title: "Fisk",
-    description: "Flaggar för: Fisk/Skaldjur",
-  },
-  {
     title: "Soja",
     description: "Flaggar för: Soja, SojaBönor, SojaPulver",
+  },
+  {
+    title: "Fisk",
+    description: "Flaggar för: Fisk/Skaldjur",
   },
 ];
 
@@ -57,25 +57,23 @@ const AllergenList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row nowrap",
-    minWidth: 400,
+    minWidth: 330,
+    flex: 1,
     borderColor: "black",
+    //backgroundColor: "rgba(219,211,173, 0.1)",
     backgroundColor: "white",
   },
   listItem: {
-    backgroundColor: "rgba(219,211,173, 0.1)",
     borderRadius: 10,
+    width: 230,
     marginBottom: 2,
   },
-  layout: {
-    flexDirection: "row nowrap",
-  },
+  layout: {},
   button: {
     top: 12,
     position: "absolute",
     right: 8,
     height: 33,
-    minHeight: "offset",
   },
 });
 

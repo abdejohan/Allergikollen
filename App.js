@@ -10,7 +10,7 @@ import { EvaIconsPack } from "@ui-kitten/eva-icons";
 
 // these handle screens for both bottom and top navigation
 import Settings from "./pages/Settings";
-import IntroPage from "./screens/IntroPage";
+import IntroPage from "./pages/IntroPage";
 import {
   HomeScreenNavigator,
   ScannerScreenNavigator,
