@@ -14,7 +14,7 @@ import IntroPage from "./pages/IntroPage";
 import {
   HomeScreenNavigator,
   ScannerScreenNavigator,
-  ReportScreenNavigator,
+  SupportScreenNavigator,
 } from "./CustomNavigation";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -51,7 +51,7 @@ const App = () => {
                 name="Home"
                 component={HomeScreenNavigator}
                 options={{
-                  tabBarLabel: "Hem",
+                  tabBarLabel: "Mina Sidor",
                   tabBarIcon: () => (
                     <AntDesign name="home" size={24} color="black" />
                   ),
@@ -62,26 +62,13 @@ const App = () => {
                 component={ScannerScreenNavigator}
                 options={{
                   tabBarBadge: true,
-                  tabBarLabel: "ScannerPage",
+                  tabBarLabel: "Scanna",
                   tabBarIcon: () => (
                     <Ionicons name="barcode-outline" size={24} color="black" />
                   ),
                 }}
               />
-              <Tab.Screen
-                name="Report"
-                component={ReportScreenNavigator}
-                options={{
-                  tabBarLabel: "Support",
-                  tabBarIcon: () => (
-                    <MaterialIcons
-                      name="support-agent"
-                      size={24}
-                      color="black"
-                    />
-                  ),
-                }}
-              />
+
               <Tab.Screen
                 name="Settings"
                 children={() => (
@@ -94,9 +81,23 @@ const App = () => {
                 options={{
                   selectedAllergens: { selectedAllergens },
                   setSelectedAllergens: { setSelectedAllergens },
-                  tabBarLabel: "Settings",
+                  tabBarLabel: "Inställningar",
                   tabBarIcon: () => (
                     <MaterialIcons name="settings" size={24} color="black" />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Support"
+                component={SupportScreenNavigator}
+                options={{
+                  tabBarLabel: "Support",
+                  tabBarIcon: () => (
+                    <MaterialIcons
+                      name="support-agent"
+                      size={24}
+                      color="black"
+                    />
                   ),
                 }}
               />

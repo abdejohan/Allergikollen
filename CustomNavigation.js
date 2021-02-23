@@ -7,7 +7,8 @@ import Home from "./pages/Home";
 import ProductScreen from "./screens/ProductScreen";
 import OpenScanner from "./screens/OpenScanner";
 import ScannerPage from "./pages/ScannerPage";
-import Report from "./pages/Report";
+import Support from "./pages/Support";
+import IntroPage from "./pages/IntroPage";
 
 const Stack = createStackNavigator();
 
@@ -34,13 +35,13 @@ const ScannerScreenNavigator = () => {
 
 export { ScannerScreenNavigator }; //
 
-const ReportScreenNavigator = () => {
+const SupportScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Report" component={Report} />
-      <Stack.Screen name="NestedReport" component={NestedScreen} />
+      <Stack.Screen name="Support" component={Support} />
+      <Stack.Screen name="IntroPage" component={IntroPage} />
     </Stack.Navigator>
   );
 };
 
-export { ReportScreenNavigator };
+export { SupportScreenNavigator };
