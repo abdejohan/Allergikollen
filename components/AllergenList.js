@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Icon, List, ListItem, Layout } from "@ui-kitten/components";
+import {
+  Button,
+  Icon,
+  Divider,
+  List,
+  ListItem,
+  Layout,
+} from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 
 const data = [
@@ -52,7 +59,14 @@ const AllergenList = () => {
     }
   }, [removeItem]);
 
-  return <List style={styles.container} data={data} renderItem={renderItem} />;
+  return (
+    <List
+      style={styles.container}
+      data={data}
+      ItemSeparatorComponent={Divider}
+      renderItem={renderItem}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
