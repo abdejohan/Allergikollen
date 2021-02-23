@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Text, Button } from "@ui-kitten/components";
+import { Layout, Text, Button, Spinner } from "@ui-kitten/components";
 import { Image, StyleSheet, ScrollText } from "react-native";
 import useAxios from "axios-hooks";
 
@@ -8,15 +8,16 @@ import { API_KEY } from "@env";
 const ProductScreen = ({ route, navigation }) => {
   const QRCODE = route.params.qrcode;
   const [product, setProduct] = useState({});
+  const [noProduct, setNoProduct] = useState(false);
+  console.log(Object.keys(product).length + "HÄR ÄR DEN FÖRSTA");
+  console.log(noProduct);
   const API_URL = `https://api.dabas.com/DABASService/V2/article/gtin/0${QRCODE}/JSON?apikey=${API_KEY}`;
 
   const [{ data, loading, error, response }, execute] = useAxios(API_URL);
-  console.log("typeof " + typeof product);
 
   useEffect(() => {
-    console.log("typeof " + typeof product);
-    console.log("brytpunkt");
     if (data) {
+      console.log("FINAL BOSS: " + Boolean(data));
       if (Object.keys(data).length > 0) {
         setProduct({
           varumarke: data.Varumarke.Varumarke,
@@ -29,22 +30,26 @@ const ProductScreen = ({ route, navigation }) => {
           huvudgruppBenamning: data.Varugrupp.HuvudgruppBenamning,
           ingrediensforteckning: data.Ingrediensforteckning,
         });
-      } else {
-        setProduct({});
+        console.log(noProduct);
+        setNoProduct(false);
       }
+    } else {
+      console.log(noProduct);
+      setNoProduct(true);
+      console.log("got here");
     }
   }, [data]);
 
   return (
     <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      {loading && <Text>Loading...</Text>}
+      {loading && <Spinner size="giant" />}
       {error && (
         <>
           <Text>ERRORR</Text>
           <ScrollText>{JSON.stringify(error, null, 2)}</ScrollText>
         </>
       )}
-      {Object.keys(product).length > 2 && (
+      {Object.keys(product).length > 0 && (
         <>
           <Text category="c2">{product.varumarke}</Text>
           <Text category="h4">{product.tillverkare}</Text>
@@ -56,7 +61,7 @@ const ProductScreen = ({ route, navigation }) => {
           </Button>
         </>
       )}
-      {Object.keys(product).length == 0 && (
+      {noProduct && !loading && (
         <>
           <Text category="h1">Produkt saknas!</Text>
           <Text category="h6">
