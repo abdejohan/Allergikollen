@@ -7,6 +7,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { default as theme } from "./custom-theme.json"; // <-- Import app theme
 
 // these handle screens for both bottom and top navigation
 import Settings from "./pages/Settings";
@@ -35,7 +36,7 @@ const App = () => {
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva.light}>
+      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
         {!loaded ? (
           <IntroPage />
         ) : (
