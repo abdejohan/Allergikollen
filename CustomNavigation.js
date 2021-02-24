@@ -32,8 +32,22 @@ const ScannerScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="ScannerPage" component={ScannerPage} />
-      <Stack.Screen name="ProductScreen" component={ProductScreen} />
-      <Stack.Screen name="OpenScanner" component={OpenScanner} />
+      <Stack.Screen
+        name="ProductScreen"
+        component={ProductScreen}
+        options={{
+          title: "Produkt Info",
+          headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name="OpenScanner"
+        component={OpenScanner}
+        options={{
+          title: "Scanner",
+          headerLeft: null,
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -54,10 +68,34 @@ const SupportScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Support" component={Support} />
-      <Stack.Screen name="Allergikollen" component={Allergikollen} />
-      <Stack.Screen name="Kundtjanst" component={Kundtjanst} />
-      <Stack.Screen name="Kontakt" component={Kontakt} />
-      <Stack.Screen name="Hjalp" component={Hjalp} />
+      <Stack.Screen
+        name="Allergikollen"
+        component={Allergikollen}
+        options={{
+          title: "Allergikollen",
+        }}
+      />
+      <Stack.Screen
+        name="Kundtjanst"
+        component={Kundtjanst}
+        options={{
+          title: "Kundtjänst",
+        }}
+      />
+      <Stack.Screen
+        name="Kontakt"
+        component={Kontakt}
+        options={{
+          title: "Kontakt",
+        }}
+      />
+      <Stack.Screen
+        name="Hjalp"
+        component={Hjalp}
+        options={{
+          title: "Hjälp",
+        }}
+      />
     </Stack.Navigator>
   );
 };
