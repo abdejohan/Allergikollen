@@ -41,7 +41,7 @@ const ProductScreen = ({ route, navigation }) => {
       {error && (
         <>
           <Text>Något vart fel. Testa igen!</Text>
-          <ScrollText>{JSON.stringify(error, null, 2)}</ScrollText>
+          <Text>{JSON.stringify(error, null, 2)}</Text>
         </>
       )}
       {Object.keys(product).length > 0 && (

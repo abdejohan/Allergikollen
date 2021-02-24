@@ -56,6 +56,8 @@ const AllergenList = () => {
         style={styles.container}
         contentContainerStyle={styles.container2}
         data={data}
+        horizontal={false}
+        numColumns={3}
         renderItem={renderItem}
       />
     </>
@@ -64,11 +66,11 @@ const AllergenList = () => {
 
 const styles = StyleSheet.create({
   container2: {
-    flexWrap: "wrap",
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
     backgroundColor: "white",
+    flex: 1,
   },
+  listItem: {},
   button: {
     marginHorizontal: 0,
     marginVertical: 0,
