@@ -7,14 +7,6 @@ const Home = ({ navigation }) => {
   return (
     <Layout style={Sizing.Screen}>
       <Text category="h1">HOME</Text>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("NestedHome", { msg: "From Screen 1" })
-        }
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Click Me!</Text>
-      </TouchableOpacity>
     </Layout>
   );
 };
