@@ -31,7 +31,13 @@ export { HomeScreenNavigator };
 const ScannerScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ScannerPage" component={ScannerPage} />
+      <Stack.Screen
+        name="ScannerPage"
+        component={ScannerPage}
+        options={{
+          title: "Sök produkt",
+        }}
+      />
       <Stack.Screen
         name="ProductScreen"
         component={ProductScreen}

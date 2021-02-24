@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Icon,
-  Divider,
-  List,
-  ListItem,
-  Layout,
-} from "@ui-kitten/components";
+import { Button, Icon, List, ListItem, Layout } from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 
 const data = [
@@ -22,10 +15,9 @@ const data = [
   {
     title: "Fisk",
   },
-  {
-    title: "Fisk",
-  },
 ];
+// icon in 'remove allergen' button
+const close = (props) => <Icon {...props} name="close-circle-outline" />;
 
 const AllergenList = () => {
   const [removeItem, setRemoveItem] = useState(null);
@@ -35,17 +27,19 @@ const AllergenList = () => {
       <ListItem
         style={styles.listItem}
         title={item.title}
-        description={item.description}
+        children={
+          <Button
+            style={styles.button}
+            size="tiny"
+            accessoryRight={close}
+            onPress={() => {
+              setRemoveItem(index);
+            }}
+          >
+            {item.title}
+          </Button>
+        }
       />
-      <Button
-        style={styles.button}
-        appearance="ghost"
-        onPress={() => {
-          setRemoveItem(index);
-        }}
-      >
-        Ta bort
-      </Button>
     </Layout>
   );
 
@@ -57,30 +51,29 @@ const AllergenList = () => {
   }, [removeItem]);
 
   return (
-    <List
-      style={styles.container}
-      data={data}
-      ItemSeparatorComponent={Divider}
-      renderItem={renderItem}
-    />
+    <>
+      <List
+        style={styles.container}
+        contentContainerStyle={styles.container2}
+        data={data}
+        renderItem={renderItem}
+      />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: "90%",
-    //backgroundColor: "rgba(219,211,173, 0.1)",
-  },
-  listItem: {
-    flex: 1,
-    borderRadius: 10,
-    marginBottom: 2,
-  },
-  layout: {
-    justifyContent: "center",
-    alignItems: "center",
+  container2: {
+    flexWrap: "wrap",
     flexDirection: "row",
-    flexWrap: "nowrap",
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+  button: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
   },
 });
 
