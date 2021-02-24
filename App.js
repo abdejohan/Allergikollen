@@ -7,7 +7,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 import { default as theme } from "./custom-theme.json"; // <-- Import app theme
+import { default as mapping } from "./mapping.json"; // <-- Import app mapping
 
 // these handle screens for both bottom and top navigation
 import Settings from "./pages/Settings";
@@ -21,10 +23,9 @@ import {
 const Tab = createMaterialBottomTabNavigator();
 
 const App = () => {
-  const [loaded, setLoaded] = useState(null);
-  setTimeout(function () {
-    setLoaded("loaded");
-  }, 10);
+  let [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+  });
 
   const [selectedAllergens, setSelectedAllergens] = useState([]);
   const deleteAllergen = (allergen) => {
@@ -36,17 +37,21 @@ const App = () => {
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-        {!loaded ? (
+      <ApplicationProvider
+        {...eva}
+        theme={{ ...eva.light, ...theme }}
+        customMapping={mapping}
+      >
+        {!fontsLoaded ? (
           <IntroPage />
         ) : (
           <NavigationContainer>
             <Tab.Navigator
               shifting={true}
               initialRouteName="Scan"
-              activeColor="black"
+              activeColor="white"
               inactiveColor="grey"
-              barStyle={{ backgroundColor: "white" }}
+              barStyle={{ backgroundColor: "rgba(50, 159, 91, 0.32)" }}
             >
               <Tab.Screen
                 name="Home"
@@ -54,7 +59,12 @@ const App = () => {
                 options={{
                   tabBarLabel: "Mina Sidor",
                   tabBarIcon: () => (
-                    <AntDesign name="home" size={24} color="black" />
+                    <AntDesign
+                      name="home"
+                      style={{ color: "white" }}
+                      size={24}
+                      color="black"
+                    />
                   ),
                 }}
               />
@@ -65,7 +75,7 @@ const App = () => {
                   tabBarBadge: true,
                   tabBarLabel: "Scanna",
                   tabBarIcon: () => (
-                    <Ionicons name="barcode-outline" size={24} color="black" />
+                    <Ionicons name="barcode-outline" size={24} color="white" />
                   ),
                 }}
               />
@@ -84,7 +94,7 @@ const App = () => {
                   setSelectedAllergens: { setSelectedAllergens },
                   tabBarLabel: "Inställningar",
                   tabBarIcon: () => (
-                    <MaterialIcons name="settings" size={24} color="black" />
+                    <MaterialIcons name="settings" size={24} color="white" />
                   ),
                 }}
               />
@@ -97,7 +107,7 @@ const App = () => {
                     <MaterialIcons
                       name="support-agent"
                       size={24}
-                      color="black"
+                      color="white"
                     />
                   ),
                 }}
