@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Layout, Text, Icon, Button } from "@ui-kitten/components";
+import { Sizing } from "../styles/index";
 
 // components
 import AllergenList from "../components/AllergenList";
@@ -10,7 +11,7 @@ const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 
 const IntroPage = ({ navigation }) => {
   return (
-    <Layout style={styles.layout}>
+    <Layout style={Sizing.Screen}>
       <Text style={styles.listHeader} status="warning" category="h6">
         Vi säger till om produkten innehåller:{" "}
       </Text>
@@ -28,12 +29,6 @@ const IntroPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  layout: {
-    justifyContent: "flex-start",
-    alignItems: "center",
-    flex: 1,
-    paddingTop: 10,
-  },
   listHeader: {
     padding: 20,
   },

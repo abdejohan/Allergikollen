@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Layout, Text, Button, Spinner, Avatar } from "@ui-kitten/components";
 import { StyleSheet, ScrollText } from "react-native";
 import useAxios from "axios-hooks";
-import { Buttons } from "../styles/index";
+import { Sizing } from "../styles/index";
 
 import { API_KEY } from "@env";
 
@@ -36,7 +36,7 @@ const ProductScreen = ({ route, navigation }) => {
   }, [data]);
 
   return (
-    <Layout style={Buttons.Screen}>
+    <Layout style={Sizing.Screen}>
       {loading && <Spinner size="giant" />}
       {error && (
         <>

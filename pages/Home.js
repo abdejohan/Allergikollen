@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
-import axios from "axios";
+import { Sizing } from "../styles/index";
 
 const Home = ({ navigation }) => {
   return (
-    <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <Layout style={Sizing.Screen}>
       <Text category="h1">HOME</Text>
       <TouchableOpacity
         onPress={() =>
@@ -20,13 +20,6 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#00000025",
-  },
   text: {
     color: "#000",
     fontWeight: "700",

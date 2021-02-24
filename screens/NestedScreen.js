@@ -1,12 +1,12 @@
 import React from "react";
-import OpenScanner from "./OpenScanner";
-import { View, Text } from "react-native";
+import { Layout, Text } from "@ui-kitten/components";
+import { Sizing } from "../styles/index";
 
 const NestedScreen = ({ route }) => {
   return (
-    <View>
+    <Layout style={Sizing.Screen}>
       <Text>gg</Text>
-    </View>
+    </Layout>
   );
 };
 

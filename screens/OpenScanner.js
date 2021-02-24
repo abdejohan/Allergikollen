@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { StyleSheet } from "react-native";
+import { Layout, Text, Icon, Button } from "@ui-kitten/components";
+import { Sizing } from "../styles/index";
 import Constants from "expo-constants";
 import { Dimensions } from "react-native";
 
@@ -33,21 +35,15 @@ const OpenScanner = ({ navigation }) => {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "flex-end",
-      }}
-    >
+    <Layout style={Sizing.Screen}>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={[StyleSheet.absoluteFillObject, styles.container]}
       >
         <Text style={styles.description}>Scanna en produkt</Text>
-        <View style={styles.qr}></View>
+        <Layout style={styles.qr}></Layout>
       </BarCodeScanner>
-    </View>
+    </Layout>
   );
 };
 
