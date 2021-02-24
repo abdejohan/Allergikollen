@@ -68,14 +68,12 @@ const AllergenList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    minWidth: 330,
-    flex: 1,
+    width: "90%",
     //backgroundColor: "rgba(219,211,173, 0.1)",
   },
   listItem: {
     flex: 1,
     borderRadius: 10,
-    height: 80,
     marginBottom: 2,
   },
   layout: {
