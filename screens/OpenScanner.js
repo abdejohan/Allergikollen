@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
   qr: {
     borderWidth: 5,
     borderRadius: 10,
+    backgroundColor: "transparent",
     borderColor: "white",
     marginTop: "20%",
     marginBottom: "20%",

@@ -1,12 +1,19 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-// Pages and Screens
+// Pages
 import Home from "./pages/Home";
+import ScannerPage from "./pages/ScannerPage";
+import Settings from "./pages/Settings";
+import Support from "./pages/Support";
+
+// Screens
 import ProductScreen from "./screens/ProductScreen";
 import OpenScanner from "./screens/OpenScanner";
-import ScannerPage from "./pages/ScannerPage";
-import Support from "./pages/Support";
+import Allergikollen from "./screens/Allergikollen";
+import Kundtjanst from "./screens/Kundtjanst";
+import Kontakt from "./screens/Kontakt";
+import Hjalp from "./screens/Hjalp";
 import IntroPage from "./pages/IntroPage";
 
 const Stack = createStackNavigator();
@@ -33,11 +40,24 @@ const ScannerScreenNavigator = () => {
 
 export { ScannerScreenNavigator }; //
 
+const SettingsScreenNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Settings" component={Settings} />
+    </Stack.Navigator>
+  );
+};
+
+export { SettingsScreenNavigator };
+
 const SupportScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Support" component={Support} />
-      <Stack.Screen name="IntroPage" component={IntroPage} />
+      <Stack.Screen name="Allergikollen" component={Allergikollen} />
+      <Stack.Screen name="Kundtjanst" component={Kundtjanst} />
+      <Stack.Screen name="Kontakt" component={Kontakt} />
+      <Stack.Screen name="Hjalp" component={Hjalp} />
     </Stack.Navigator>
   );
 };

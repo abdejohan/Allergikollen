@@ -6,27 +6,27 @@ export const Support = ({ navigation }) => {
     <React.Fragment>
       <Menu>
         <MenuItem
-          title="Om oss"
+          title="Om Allergikollen"
           onPress={() => {
-            navigation.navigate("IntroPage");
+            navigation.navigate("Allergikollen");
           }}
         />
         <MenuItem
           title="Kontakt"
           onPress={() => {
-            navigation.navigate("IntroPage");
+            navigation.navigate("Kontakt");
           }}
         />
         <MenuItem
           title="Kundtjänst"
           onPress={() => {
-            navigation.navigate("IntroPage");
+            navigation.navigate("Kundtjanst");
           }}
         />
         <MenuItem
           title="Hjälp"
           onPress={() => {
-            navigation.navigate("IntroPage");
+            navigation.navigate("Hjalp");
           }}
         />
       </Menu>
