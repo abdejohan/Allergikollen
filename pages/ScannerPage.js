@@ -9,7 +9,7 @@ import QrSearchManually from "../components/QrSearchManually";
 const IntroPage = ({ navigation }) => {
   return (
     <Layout style={styles.layout}>
-      <Text category="h1"> SCANNER PAGE </Text>
+      <Text category="s2">Vi säger till om produkten innehåller: </Text>
       <AllergenList />
       <QrSearchManually />
       <Button
@@ -24,9 +24,9 @@ const IntroPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   layout: {
-    flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
+    flex: 1,
     paddingTop: 10,
   },
   button: {

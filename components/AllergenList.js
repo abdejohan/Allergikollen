@@ -12,37 +12,34 @@ import { StyleSheet } from "react-native";
 const data = [
   {
     title: "Nötter",
-    description: "Flaggar för: Jordnötter",
   },
   {
     title: "mejeriprodukter",
-    description: "Flaggar för: Mjölk",
   },
   {
     title: "Soja",
-    description: "Flaggar för: Soja, SojaBönor, SojaPulver",
   },
   {
     title: "Fisk",
-    description: "Flaggar för: Fisk/Skaldjur",
+  },
+  {
+    title: "Fisk",
   },
 ];
 
 const AllergenList = () => {
   const [removeItem, setRemoveItem] = useState(null);
 
-  const renderItemIcon = (props) => <Icon {...props} name="person" />;
-
   const renderItem = ({ item, index }) => (
-    <Layout>
+    <Layout style={styles.layout}>
       <ListItem
         style={styles.listItem}
         title={item.title}
         description={item.description}
-        accessoryLeft={renderItemIcon}
       />
       <Button
         style={styles.button}
+        appearance="ghost"
         onPress={() => {
           setRemoveItem(index);
         }}
@@ -73,21 +70,19 @@ const styles = StyleSheet.create({
   container: {
     minWidth: 330,
     flex: 1,
-    borderColor: "black",
     //backgroundColor: "rgba(219,211,173, 0.1)",
-    backgroundColor: "white",
   },
   listItem: {
+    flex: 1,
     borderRadius: 10,
-    width: 230,
+    height: 80,
     marginBottom: 2,
   },
-  layout: {},
-  button: {
-    top: 12,
-    position: "absolute",
-    right: 8,
-    height: 33,
+  layout: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "nowrap",
   },
 });
 
