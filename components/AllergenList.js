@@ -1,98 +1,97 @@
 import React, { useState, useEffect } from "react";
-import { Button, Icon, List, ListItem, Layout } from "@ui-kitten/components";
+import {
+  Button,
+  Icon,
+  List,
+  ListItem,
+  Layout,
+  Text,
+} from "@ui-kitten/components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StyleSheet } from "react-native";
-
-/*const data = [
-  {
-    title: "Nötter",
-    description: "Flaggar för: Jordnötter",
-  },
-  {
-    title: "mejeriprodukter",
-    description: "Flaggar för: Mjölk",
-  },
-  {
-    title: "Soja",
-    description: "Flaggar för: Soja, SojaBönor, SojaPulver",
-  },
-  {
-    title: "Fisk",
-    description: "Flaggar för: Fisk/Skaldjur",
-  },
-];*/
+const trashCan = (props) => <Icon {...props} name="trash-2-outline" />;
 
 const AllergenList = () => {
   useEffect(() => {
-    getData();
+    setInterval(function () {
+      getData();
+    }, 2000);
   }, []);
+
+  const [data, setData] = useState([]);
+
+  //const renderItemIcon = (props) => <Icon {...props} name="person" />;
+
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("allergens").then((res) => {
-        setData(res != null ? JSON.parse(res).allergens : null);
-      });
-
-      console.log(data);
+      const jsonValue = await AsyncStorage.getItem("allergens");
+      setData(jsonValue != null ? JSON.parse(jsonValue) : null);
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
       console.log(e);
     }
   };
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("allergens", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const deleteItem = async (item) => {
     if (data.includes(item)) {
       const newData = data.filter((e) => e !== item);
-      try {
-        await AsyncStorage.setItem("allergens", newData);
-      } catch (e) {
-        console.log(e);
-      }
+      storeData(newData);
     }
+    getData();
   };
-  const [data, setData] = useState([]);
-  const [removeItem, setRemoveItem] = useState(null);
 
-  const renderItemIcon = (props) => <Icon {...props} name="person" />;
+  const renderItem = () => {
+    return data.map((item) => {
+      return (
+        <Layout key={item} style={styles.listItem}>
+          <Text>{item}</Text>
+          <Button
+            size="tiny"
+            appearance="ghost"
+            style={styles.listButton}
+            accessoryLeft={trashCan}
+            onPress={() => {
+              deleteItem(item);
+            }}
+          >
+            Ta bort
+          </Button>
+        </Layout>
+      );
+    });
+  };
 
-  const renderItem = ({ item, index }) => (
-    <Layout>
-      <ListItem
-        style={styles.listItem}
-        title={item}
-        description={item.description}
-        accessoryLeft={renderItemIcon}
-      />
-      <Button
-        style={styles.button}
-        onPress={() => {
-          deleteItem(item);
-        }}
-      >
-        Ta bort
-      </Button>
-    </Layout>
-  );
+  const test = () => {
+    console.log(data);
+  };
 
-  useEffect(() => {
-    if (removeItem !== null) {
-      data.splice(removeItem, 1);
-      setRemoveItem(null);
-    }
-  }, [removeItem]);
-
-  return <List style={styles.container} data={data} renderItem={renderItem} />;
+  return <Layout style={styles.allergenList}>{renderItem()}</Layout>;
 };
 
 const styles = StyleSheet.create({
   container: {
-    minWidth: 330,
     flex: 1,
-    borderColor: "black",
-    //backgroundColor: "rgba(219,211,173, 0.1)",
-    backgroundColor: "white",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingTop: 50,
   },
   listItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    width: 200,
+    paddingLeft: 10,
     borderRadius: 10,
-    width: 230,
-    marginBottom: 2,
   },
   layout: {},
   button: {
@@ -100,6 +99,22 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 8,
     height: 33,
+  },
+  allergenList: {
+    minWidth: 250,
+    minHeight: 250,
+    marginTop: 50,
+    color: "green",
+    borderWidth: 2,
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "rgba(219,211,173, 0.3)",
+    borderColor: "rgba(219,211,173, 0.2)",
+    borderRadius: 10,
+    padding: 20,
+  },
+  listButton: {
+    height: 40,
   },
 });
 

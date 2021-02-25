@@ -4,45 +4,26 @@ import { StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const trashCan = (props) => <Icon {...props} name="trash-2-outline" />;
 
-const Settings = (props) => {
+const Settings = () => {
   useEffect(() => {
-    setInitialState();
+    setInterval(function () {
+      getData();
+    }, 2000);
   }, []);
   const [newAllergen, setNewAllergen] = useState("");
   const [data, setData] = useState([]);
-  const [allergensObject, setAllergensObject] = useState({
-    allergens: [],
-  });
 
-  const setInitialState = async () => {
-    const jsonValue = await AsyncStorage.getItem("allergens").then((res) => {
-      console.log(res);
-      if (res != undefined) {
-        setData(res != null ? JSON.parse(res).allergens : null);
-        setAllergensObject({
-          allergens: res != null ? JSON.parse(res).allergens : [],
-        });
-      }
-      setData([]);
-      setAllergensObject({ allergens: [] });
-    });
-  };
   const logger = () => {
-    console.log("data");
-    console.log(data.length);
-    console.log("AllergensOjbect");
-    console.log(allergensObject);
+    console.log(data);
   };
   const handleTextChange = (event) => {
     setNewAllergen(event);
   };
   const addNewAllergen = () => {
     if (newAllergen) {
-      let newArray = allergensObject.allergens;
-      //console.log(newArray);
+      let newArray = data;
       newArray.push(newAllergen);
-      setAllergensObject({ allergens: newArray });
-      storeData({ allergens: newArray });
+      storeData(newArray);
       setData(newArray);
     }
     setNewAllergen("");
@@ -58,9 +39,7 @@ const Settings = (props) => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("allergens");
-
       setData(jsonValue != null ? JSON.parse(jsonValue) : null);
-      console.log(data);
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
       console.log(e);
@@ -68,36 +47,32 @@ const Settings = (props) => {
   };
 
   const deleteAllergen = async (item) => {
-    if (allergensObject.allergens.includes(item)) {
-      const arr = allergensObject.allergens;
-      let newArr = arr.filter((e) => e !== item);
-      setAllergensObject({ allergens: newArr });
+    if (data.includes(item)) {
+      let newArr = data.filter((e) => e !== item);
       storeData(newArr);
       setData(newArr);
     }
   };
 
-  const showAllergen = (arr) => {
-    if (arr[0]) {
-      return arr.map((item) => {
-        return (
-          <Layout key={item} style={styles.listItem}>
-            <Text>{item}</Text>
-            <Button
-              size="tiny"
-              appearance="ghost"
-              style={styles.button}
-              accessoryLeft={trashCan}
-              onPress={() => {
-                deleteAllergen(item);
-              }}
-            >
-              Ta bort
-            </Button>
-          </Layout>
-        );
-      });
-    }
+  const showAllergen = () => {
+    return data.map((item) => {
+      return (
+        <Layout key={item} style={styles.listItem}>
+          <Text>{item}</Text>
+          <Button
+            size="tiny"
+            appearance="ghost"
+            style={styles.button}
+            accessoryLeft={trashCan}
+            onPress={() => {
+              deleteAllergen(item);
+            }}
+          >
+            Ta bort
+          </Button>
+        </Layout>
+      );
+    });
   };
 
   return (
@@ -109,8 +84,8 @@ const Settings = (props) => {
       </Text>
 
       <Layout style={styles.allergenList}>
-        {data.length > 0 ? (
-          showAllergen(data)
+        {data[0] !== undefined ? (
+          showAllergen()
         ) : (
           <Text>Du har inga allergier valda än..</Text>
         )}
