@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Icon, List, ListItem, Layout } from "@ui-kitten/components";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StyleSheet } from "react-native";
 
-const data = [
+/*const data = [
   {
     title: "Nötter",
     description: "Flaggar för: Jordnötter",
@@ -19,9 +20,34 @@ const data = [
     title: "Fisk",
     description: "Flaggar för: Fisk/Skaldjur",
   },
-];
+];*/
 
 const AllergenList = () => {
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("allergens").then((res) => {
+        setData(res != null ? JSON.parse(res).allergens : null);
+      });
+
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const deleteItem = async (item) => {
+    if (data.includes(item)) {
+      const newData = data.filter((e) => e !== item);
+      try {
+        await AsyncStorage.setItem("allergens", newData);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+  const [data, setData] = useState([]);
   const [removeItem, setRemoveItem] = useState(null);
 
   const renderItemIcon = (props) => <Icon {...props} name="person" />;
@@ -30,14 +56,14 @@ const AllergenList = () => {
     <Layout>
       <ListItem
         style={styles.listItem}
-        title={item.title}
+        title={item}
         description={item.description}
         accessoryLeft={renderItemIcon}
       />
       <Button
         style={styles.button}
         onPress={() => {
-          setRemoveItem(index);
+          deleteItem(item);
         }}
       >
         Ta bort
