@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Icon, List, ListItem, Layout } from "@ui-kitten/components";
+import {
+  Button,
+  Icon,
+  List,
+  Text,
+  ListItem,
+  Layout,
+} from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 
 const data = [
@@ -30,7 +37,7 @@ const AllergenList = () => {
         children={
           <Button
             style={styles.button}
-            size="tiny"
+            size="small"
             accessoryRight={close}
             onPress={() => {
               setRemoveItem(index);
@@ -52,20 +59,33 @@ const AllergenList = () => {
 
   return (
     <>
-      <List
-        style={styles.container}
-        contentContainerStyle={styles.container2}
-        data={data}
-        horizontal={false}
-        numColumns={3}
-        renderItem={renderItem}
-      />
+      {data.length > 0 ? (
+        <List
+          style={styles.container}
+          contentContainerStyle={styles.container2}
+          data={data}
+          numColumns={2}
+          renderItem={renderItem}
+        />
+      ) : (
+        <>
+          <Text category="h6">Du har inte valt någon allergi..</Text>
+          <Text category="s1">Vi visar istället allt vi hittar</Text>
+          <Text category="s2">Vi visar istället allt vi hittar</Text>
+          <Text category="p1">Vi visar istället allt vi hittar</Text>
+          <Text category="p2">Vi visar istället allt vi hittar</Text>
+          <Text category="c1">Vi visar istället allt vi hittar</Text>
+          <Text category="c2">Vi visar istället allt vi hittar</Text>
+        </>
+      )}
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {},
   container2: {
+    minWidth: 300,
     flexDirection: "column",
     backgroundColor: "white",
     flex: 1,
@@ -76,6 +96,9 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     paddingHorizontal: 0,
     paddingVertical: 0,
+  },
+  button: {
+    backgroundColor: "rgba(50, 159, 91, 0.48)",
   },
 });
 

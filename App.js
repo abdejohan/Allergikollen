@@ -51,7 +51,7 @@ const App = () => {
               initialRouteName="Scan"
               activeColor="white"
               inactiveColor="grey"
-              barStyle={{ backgroundColor: "rgba(50, 159, 91, 0.32)" }}
+              barStyle={{ backgroundColor: "rgba(50, 159, 91, 0.24)" }}
             >
               <Tab.Screen
                 name="Home"

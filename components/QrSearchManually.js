@@ -16,7 +16,7 @@ const QrSearchManually = () => {
         label="Sök Manuellt"
         value={value}
         style={styles.input}
-        placeholder="ex. 7350002404980"
+        placeholder="ex. 7 350 002 404 980"
         icon={SearchIcon}
         caption="Knappa in streckkodens siffror"
         onChangeText={(text) => {

@@ -14,14 +14,25 @@ import Allergikollen from "./screens/Allergikollen";
 import Kundtjanst from "./screens/Kundtjanst";
 import Kontakt from "./screens/Kontakt";
 import Hjalp from "./screens/Hjalp";
-import IntroPage from "./pages/IntroPage";
 
 const Stack = createStackNavigator();
 
 const HomeScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: "Hem",
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -36,6 +47,12 @@ const ScannerScreenNavigator = () => {
         component={ScannerPage}
         options={{
           title: "Sök produkt",
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
         }}
       />
       <Stack.Screen
@@ -44,6 +61,12 @@ const ScannerScreenNavigator = () => {
         options={{
           title: "Produkt Info",
           headerLeft: null,
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
         }}
       />
       <Stack.Screen
@@ -52,6 +75,12 @@ const ScannerScreenNavigator = () => {
         options={{
           title: "Scanner",
           headerLeft: null,
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
         }}
       />
     </Stack.Navigator>
@@ -73,12 +102,30 @@ export { SettingsScreenNavigator };
 const SupportScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Support" component={Support} />
+      <Stack.Screen
+        name="Support"
+        component={Support}
+        options={{
+          title: "Support",
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
+        }}
+      />
       <Stack.Screen
         name="Allergikollen"
         component={Allergikollen}
         options={{
           title: "Allergikollen",
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
         }}
       />
       <Stack.Screen
@@ -86,6 +133,12 @@ const SupportScreenNavigator = () => {
         component={Kundtjanst}
         options={{
           title: "Kundtjänst",
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
         }}
       />
       <Stack.Screen
@@ -93,6 +146,12 @@ const SupportScreenNavigator = () => {
         component={Kontakt}
         options={{
           title: "Kontakt",
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
         }}
       />
       <Stack.Screen
@@ -100,6 +159,12 @@ const SupportScreenNavigator = () => {
         component={Hjalp}
         options={{
           title: "Hjälp",
+          headerStyle: {
+            backgroundColor: "rgba(50, 159, 91, 0.24)",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
         }}
       />
     </Stack.Navigator>
