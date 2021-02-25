@@ -62,7 +62,7 @@ const Settings = (props) => {
       </Text>
 
       <Layout style={styles.allergenList}>
-        {selectedAllergens.length > 0 ? (
+        {selectedAllergens ? (
           showAllergen(selectedAllergens)
         ) : (
           <Text>Du har inga allergier valda än..</Text>
