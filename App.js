@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -7,41 +7,24 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
-import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 import { default as theme } from "./custom-theme.json"; // <-- Import app theme
-import { default as mapping } from "./mapping.json"; // <-- Import app mapping
 
 // these handle screens for both bottom and top navigation
-import Settings from "./pages/Settings";
 import IntroPage from "./pages/IntroPage";
 import {
   HomeScreenNavigator,
   ScannerScreenNavigator,
   SupportScreenNavigator,
+  SettingsScreenNavigator,
 } from "./CustomNavigation";
 
 const Tab = createMaterialBottomTabNavigator();
 
 const App = () => {
-  let [fontsLoaded] = useFonts({
-    Poppins_400Regular,
-  });
-
-  const [selectedAllergens, setSelectedAllergens] = useState([]);
-  const deleteAllergen = (allergen) => {
-    const newArray = selectedAllergens.filter((e) => e !== allergen);
-    console.log(newArray);
-    setSelectedAllergens(newArray);
-  };
-
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider
-        {...eva}
-        theme={{ ...eva.light, ...theme }}
-        customMapping={mapping}
-      >
+      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
         {!fontsLoaded ? (
           <IntroPage />
         ) : (
@@ -82,16 +65,8 @@ const App = () => {
 
               <Tab.Screen
                 name="Settings"
-                children={() => (
-                  <Settings
-                    selectedAllergens={selectedAllergens}
-                    setSelectedAllergens={setSelectedAllergens}
-                    deleteAllergen={deleteAllergen}
-                  />
-                )}
+                component={SettingsScreenNavigator}
                 options={{
-                  selectedAllergens: { selectedAllergens },
-                  setSelectedAllergens: { setSelectedAllergens },
                   tabBarLabel: "Inställningar",
                   tabBarIcon: () => (
                     <MaterialIcons name="settings" size={24} color="white" />
