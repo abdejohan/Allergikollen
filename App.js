@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,11 +21,16 @@ import {
 const Tab = createMaterialBottomTabNavigator();
 
 const App = () => {
+  const [dataLoaded, setDataLoaded] = useState(false);
+  setTimeout(() => {
+    setDataLoaded(true);
+  }, 1000);
+
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-        {!fontsLoaded ? (
+        {!dataLoaded ? (
           <IntroPage />
         ) : (
           <NavigationContainer>
