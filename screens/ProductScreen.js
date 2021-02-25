@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Text, Button, Spinner } from "@ui-kitten/components";
-import { Image, StyleSheet, ScrollText } from "react-native";
+import { Layout, Text, Button, Spinner, Avatar } from "@ui-kitten/components";
+import { StyleSheet, ScrollText } from "react-native";
 import useAxios from "axios-hooks";
+import { Sizing } from "../styles/index";
 
 import { API_KEY } from "@env";
 
@@ -9,15 +10,12 @@ const ProductScreen = ({ route, navigation }) => {
   const QRCODE = route.params.qrcode;
   const [product, setProduct] = useState({});
   const [noProduct, setNoProduct] = useState(false);
-  console.log(Object.keys(product).length + "HÄR ÄR DEN FÖRSTA");
-  console.log(noProduct);
   const API_URL = `https://api.dabas.com/DABASService/V2/article/gtin/0${QRCODE}/JSON?apikey=${API_KEY}`;
 
   const [{ data, loading, error, response }, execute] = useAxios(API_URL);
 
   useEffect(() => {
     if (data) {
-      console.log("FINAL BOSS: " + Boolean(data));
       if (Object.keys(data).length > 0) {
         setProduct({
           varumarke: data.Varumarke.Varumarke,
@@ -30,23 +28,20 @@ const ProductScreen = ({ route, navigation }) => {
           huvudgruppBenamning: data.Varugrupp.HuvudgruppBenamning,
           ingrediensforteckning: data.Ingrediensforteckning,
         });
-        console.log(noProduct);
         setNoProduct(false);
       }
     } else {
-      console.log(noProduct);
       setNoProduct(true);
-      console.log("got here");
     }
   }, [data]);
 
   return (
-    <Layout style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <Layout style={Sizing.Screen}>
       {loading && <Spinner size="giant" />}
       {error && (
         <>
-          <Text>ERRORR</Text>
-          <ScrollText>{JSON.stringify(error, null, 2)}</ScrollText>
+          <Text>Något vart fel. Testa igen!</Text>
+          <Text>{JSON.stringify(error, null, 2)}</Text>
         </>
       )}
       {Object.keys(product).length > 0 && (
@@ -55,7 +50,7 @@ const ProductScreen = ({ route, navigation }) => {
           <Text category="h4">{product.tillverkare}</Text>
           <Text category="c2">{product.artikelbenamning}</Text>
           <Text category="c1">{product.tillverkningslander}</Text>
-          <Image source={{ url: product.img }} style={styles.img1} />
+          <Avatar source={{ url: product.img }} style={styles.img1} />
           <Button onPress={() => navigation.navigate("OpenScanner")}>
             Fortsätt Scanna!
           </Button>
@@ -82,7 +77,6 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderWidth: 2,
-    borderColor: "green",
   },
 });
 

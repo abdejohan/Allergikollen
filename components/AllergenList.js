@@ -1,47 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { Button, Icon, List, ListItem, Layout } from "@ui-kitten/components";
+import {
+  Button,
+  Icon,
+  List,
+  Text,
+  ListItem,
+  Layout,
+} from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 
 const data = [
   {
     title: "Nötter",
-    description: "Flaggar för: Jordnötter",
   },
   {
     title: "mejeriprodukter",
-    description: "Flaggar för: Mjölk",
   },
   {
     title: "Soja",
-    description: "Flaggar för: Soja, SojaBönor, SojaPulver",
   },
   {
     title: "Fisk",
-    description: "Flaggar för: Fisk/Skaldjur",
   },
 ];
+// icon in 'remove allergen' button
+const close = (props) => <Icon {...props} name="close-circle-outline" />;
 
 const AllergenList = () => {
   const [removeItem, setRemoveItem] = useState(null);
 
-  const renderItemIcon = (props) => <Icon {...props} name="person" />;
-
   const renderItem = ({ item, index }) => (
-    <Layout>
+    <Layout style={styles.layout}>
       <ListItem
         style={styles.listItem}
         title={item.title}
-        description={item.description}
-        accessoryLeft={renderItemIcon}
+        children={
+          <Button
+            style={styles.button}
+            size="small"
+            accessoryRight={close}
+            onPress={() => {
+              setRemoveItem(index);
+            }}
+          >
+            {item.title}
+          </Button>
+        }
       />
-      <Button
-        style={styles.button}
-        onPress={() => {
-          setRemoveItem(index);
-        }}
-      >
-        Ta bort
-      </Button>
     </Layout>
   );
 
@@ -52,28 +57,48 @@ const AllergenList = () => {
     }
   }, [removeItem]);
 
-  return <List style={styles.container} data={data} renderItem={renderItem} />;
+  return (
+    <>
+      {data.length > 0 ? (
+        <List
+          style={styles.container}
+          contentContainerStyle={styles.container2}
+          data={data}
+          numColumns={2}
+          renderItem={renderItem}
+        />
+      ) : (
+        <>
+          <Text category="h6">Du har inte valt någon allergi..</Text>
+          <Text category="s1">Vi visar istället allt vi hittar</Text>
+          <Text category="s2">Vi visar istället allt vi hittar</Text>
+          <Text category="p1">Vi visar istället allt vi hittar</Text>
+          <Text category="p2">Vi visar istället allt vi hittar</Text>
+          <Text category="c1">Vi visar istället allt vi hittar</Text>
+          <Text category="c2">Vi visar istället allt vi hittar</Text>
+        </>
+      )}
+    </>
+  );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    minWidth: 330,
-    flex: 1,
-    borderColor: "black",
-    //backgroundColor: "rgba(219,211,173, 0.1)",
+  container: {},
+  container2: {
+    minWidth: 300,
+    flexDirection: "column",
     backgroundColor: "white",
+    flex: 1,
   },
-  listItem: {
-    borderRadius: 10,
-    width: 230,
-    marginBottom: 2,
-  },
-  layout: {},
+  listItem: {},
   button: {
-    top: 12,
-    position: "absolute",
-    right: 8,
-    height: 33,
+    marginHorizontal: 0,
+    marginVertical: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+  },
+  button: {
+    backgroundColor: "rgba(50, 159, 91, 0.48)",
   },
 });
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Input, Button, Icon, Text, Layout } from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
+import { Sizing } from "../styles/index";
+
 const trashCan = (props) => <Icon {...props} name="trash-2-outline" />;
 
 const Settings = (props) => {
@@ -52,7 +54,7 @@ const Settings = (props) => {
   };
 
   return (
-    <Layout style={styles.container}>
+    <Layout style={Sizing.Screen}>
       <Text category="h3">Välj allergi att övervaka</Text>
       <Text category="s1">
         I Listan nedan bör du lista de allergier som du vill att scannern ska ha
@@ -60,7 +62,7 @@ const Settings = (props) => {
       </Text>
 
       <Layout style={styles.allergenList}>
-        {selectedAllergens.length > 0 ? (
+        {selectedAllergens ? (
           showAllergen(selectedAllergens)
         ) : (
           <Text>Du har inga allergier valda än..</Text>
@@ -88,12 +90,6 @@ const Settings = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 50,
-  },
   allergenList: {
     minWidth: 250,
     minHeight: 250,

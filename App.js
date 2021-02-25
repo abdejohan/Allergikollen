@@ -7,53 +7,52 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { default as theme } from "./custom-theme.json"; // <-- Import app theme
 
 // these handle screens for both bottom and top navigation
-import Settings from "./pages/Settings";
 import IntroPage from "./pages/IntroPage";
 import {
   HomeScreenNavigator,
   ScannerScreenNavigator,
-  ReportScreenNavigator,
+  SupportScreenNavigator,
+  SettingsScreenNavigator,
 } from "./CustomNavigation";
 
 const Tab = createMaterialBottomTabNavigator();
 
 const App = () => {
-  const [loaded, setLoaded] = useState(null);
-  setTimeout(function () {
-    setLoaded("loaded");
-  }, 10);
-
-  const [selectedAllergens, setSelectedAllergens] = useState([]);
-  const deleteAllergen = (allergen) => {
-    const newArray = selectedAllergens.filter((e) => e !== allergen);
-    console.log(newArray);
-    setSelectedAllergens(newArray);
-  };
+  const [dataLoaded, setDataLoaded] = useState(false);
+  setTimeout(() => {
+    setDataLoaded(true);
+  }, 1000);
 
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva.light}>
-        {!loaded ? (
+      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+        {!dataLoaded ? (
           <IntroPage />
         ) : (
           <NavigationContainer>
             <Tab.Navigator
               shifting={true}
               initialRouteName="Scan"
-              activeColor="black"
+              activeColor="white"
               inactiveColor="grey"
-              barStyle={{ backgroundColor: "white" }}
+              barStyle={{ backgroundColor: "rgba(50, 159, 91, 0.24)" }}
             >
               <Tab.Screen
                 name="Home"
                 component={HomeScreenNavigator}
                 options={{
-                  tabBarLabel: "Hem",
+                  tabBarLabel: "Mina Sidor",
                   tabBarIcon: () => (
-                    <AntDesign name="home" size={24} color="black" />
+                    <AntDesign
+                      name="home"
+                      style={{ color: "white" }}
+                      size={24}
+                      color="black"
+                    />
                   ),
                 }}
               />
@@ -62,41 +61,34 @@ const App = () => {
                 component={ScannerScreenNavigator}
                 options={{
                   tabBarBadge: true,
-                  tabBarLabel: "ScannerPage",
+                  tabBarLabel: "Scanna",
                   tabBarIcon: () => (
-                    <Ionicons name="barcode-outline" size={24} color="black" />
+                    <Ionicons name="barcode-outline" size={24} color="white" />
+                  ),
+                }}
+              />
+
+              <Tab.Screen
+                name="Settings"
+                component={SettingsScreenNavigator}
+                options={{
+                  tabBarLabel: "Inställningar",
+                  tabBarIcon: () => (
+                    <MaterialIcons name="settings" size={24} color="white" />
                   ),
                 }}
               />
               <Tab.Screen
-                name="Report"
-                component={ReportScreenNavigator}
+                name="Support"
+                component={SupportScreenNavigator}
                 options={{
                   tabBarLabel: "Support",
                   tabBarIcon: () => (
                     <MaterialIcons
                       name="support-agent"
                       size={24}
-                      color="black"
+                      color="white"
                     />
-                  ),
-                }}
-              />
-              <Tab.Screen
-                name="Settings"
-                children={() => (
-                  <Settings
-                    selectedAllergens={selectedAllergens}
-                    setSelectedAllergens={setSelectedAllergens}
-                    deleteAllergen={deleteAllergen}
-                  />
-                )}
-                options={{
-                  selectedAllergens: { selectedAllergens },
-                  setSelectedAllergens: { setSelectedAllergens },
-                  tabBarLabel: "Settings",
-                  tabBarIcon: () => (
-                    <MaterialIcons name="settings" size={24} color="black" />
                   ),
                 }}
               />

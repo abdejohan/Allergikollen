@@ -13,11 +13,12 @@ const QrSearchManually = () => {
   return (
     <Layout style={styles.layout}>
       <Input
+        label="Sök Manuellt"
         value={value}
         style={styles.input}
-        placeholder="Search"
+        placeholder="ex. 7 350 002 404 980"
         icon={SearchIcon}
-        caption="Knappa in siffrorna under streckkoden"
+        caption="Knappa in streckkodens siffror"
         onChangeText={(text) => {
           setValue(text);
           setQrcode(text);
@@ -30,7 +31,7 @@ const QrSearchManually = () => {
           setValue("");
         }}
       >
-        SÖK
+        Sök
       </Button>
     </Layout>
   );
@@ -39,7 +40,9 @@ const QrSearchManually = () => {
 const styles = StyleSheet.create({
   layout: {
     flexDirection: "row",
-    marginVertical: 50,
+    marginVertical: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     height: 32,
