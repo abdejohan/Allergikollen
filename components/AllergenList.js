@@ -32,7 +32,6 @@ const AllergenList = () => {
   const renderItem = ({ item, index }) => (
     <Layout style={styles.layout}>
       <ListItem
-        style={styles.listItem}
         title={item.title}
         children={
           <Button
@@ -61,7 +60,6 @@ const AllergenList = () => {
     <>
       {data.length > 0 ? (
         <List
-          style={styles.container}
           contentContainerStyle={styles.container2}
           data={data}
           numColumns={2}
@@ -69,13 +67,10 @@ const AllergenList = () => {
         />
       ) : (
         <>
-          <Text category="h6">Du har inte valt någon allergi..</Text>
-          <Text category="s1">Vi visar istället allt vi hittar</Text>
-          <Text category="s2">Vi visar istället allt vi hittar</Text>
-          <Text category="p1">Vi visar istället allt vi hittar</Text>
-          <Text category="p2">Vi visar istället allt vi hittar</Text>
-          <Text category="c1">Vi visar istället allt vi hittar</Text>
-          <Text category="c2">Vi visar istället allt vi hittar</Text>
+          <Text category="s1">Du har inte valt någon allergi..</Text>
+          <Text category="s2">
+            Dont worry, vi visar allt vi hittar endå! 🍎
+          </Text>
         </>
       )}
     </>
@@ -83,19 +78,9 @@ const AllergenList = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
   container2: {
-    minWidth: 300,
     flexDirection: "column",
     backgroundColor: "white",
-    flex: 1,
-  },
-  listItem: {},
-  button: {
-    marginHorizontal: 0,
-    marginVertical: 0,
-    paddingHorizontal: 0,
-    paddingVertical: 0,
   },
   button: {
     backgroundColor: "rgba(50, 159, 91, 0.48)",
