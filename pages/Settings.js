@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Icon, Text, Layout } from "@ui-kitten/components";
+import {
+  Input,
+  Button,
+  Icon,
+  Text,
+  Layout,
+  ListItem,
+} from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 import { Sizing } from "../styles/index";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const trashCan = (props) => <Icon {...props} name="trash-2-outline" />;
+const trashCan = (props) => <Icon {...props} name="close-circle-outline" />;
 
 const Settings = () => {
   useEffect(() => {
@@ -15,9 +22,6 @@ const Settings = () => {
   const [newAllergen, setNewAllergen] = useState("");
   const [data, setData] = useState([]);
 
-  const logger = () => {
-    console.log(data);
-  };
   const handleTextChange = (event) => {
     setNewAllergen(event);
   };
@@ -60,18 +64,22 @@ const Settings = () => {
     return data.map((item) => {
       return (
         <Layout key={item} style={styles.listItem}>
-          <Text>{item}</Text>
-          <Button
-            size="tiny"
-            appearance="ghost"
-            style={styles.button}
-            accessoryLeft={trashCan}
-            onPress={() => {
-              deleteAllergen(item);
-            }}
-          >
-            Ta bort
-          </Button>
+          <ListItem
+            style={styles.listItem}
+            title={item.title}
+            children={
+              <Button
+                size="small"
+                style={styles.button}
+                accessoryRight={trashCan}
+                onPress={() => {
+                  deleteAllergen(item);
+                }}
+              >
+                {item}
+              </Button>
+            }
+          />
         </Layout>
       );
     });
@@ -108,14 +116,6 @@ const Settings = () => {
         >
           Lägg till
         </Button>
-        <Button
-          style={styles.button}
-          appearance="outline"
-          size="tiny"
-          onPress={() => logger()}
-        >
-          Console
-        </Button>
       </Layout>
     </Layout>
   );
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
+    backgroundColor: "rgba(50, 159, 91, 0.48)",
     height: 40,
   },
   input: {},

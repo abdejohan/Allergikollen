@@ -9,7 +9,7 @@ import {
 } from "@ui-kitten/components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StyleSheet } from "react-native";
-const trashCan = (props) => <Icon {...props} name="trash-2-outline" />;
+const trashCan = (props) => <Icon {...props} name="close-circle-outline" />;
 
 const AllergenList = () => {
   useEffect(() => {
@@ -19,8 +19,6 @@ const AllergenList = () => {
   }, []);
 
   const [data, setData] = useState([]);
-
-  //const renderItemIcon = (props) => <Icon {...props} name="person" />;
 
   const getData = async () => {
     try {
@@ -53,45 +51,44 @@ const AllergenList = () => {
     return data.map((item) => {
       return (
         <Layout key={item} style={styles.listItem}>
-          <Text>{item}</Text>
-          <Button
-            size="tiny"
-            appearance="ghost"
-            style={styles.listButton}
-            accessoryLeft={trashCan}
-            onPress={() => {
-              deleteItem(item);
-            }}
-          >
-            Ta bort
-          </Button>
+          <ListItem
+            style={styles.listItem}
+            title={item}
+            children={
+              <Button
+                style={styles.button}
+                size="small"
+                accessoryRight={trashCan}
+                onPress={() => {
+                  deleteItem(item);
+                }}
+              >
+                {item}
+              </Button>
+            }
+          />
         </Layout>
       );
     });
-  };
-
-  const test = () => {
-    console.log(data);
   };
 
   return <Layout style={styles.allergenList}>{renderItem()}</Layout>;
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: {},
+  container2: {
+    minWidth: 300,
+    flexDirection: "column",
+    backgroundColor: "white",
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 50,
   },
-  listItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "transparent",
-    width: 200,
-    paddingLeft: 10,
-    borderRadius: 10,
+
+  button: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
   },
   button: {
     backgroundColor: "rgba(50, 159, 91, 0.48)",
@@ -109,8 +106,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
   },
-  listButton: {
-    height: 40,
+  listItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    width: 200,
+    paddingLeft: 10,
+    borderRadius: 10,
   },
 });
 
