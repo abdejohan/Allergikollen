@@ -3,102 +3,114 @@ import {
   Button,
   Icon,
   List,
-  Text,
   ListItem,
   Layout,
+  Text,
 } from "@ui-kitten/components";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StyleSheet } from "react-native";
-
-const data = [
-  {
-    title: "Nötter",
-  },
-  {
-    title: "mejeriprodukter",
-  },
-  {
-    title: "Soja",
-  },
-  {
-    title: "Fisk",
-  },
-];
-// icon in 'remove allergen' button
-const close = (props) => <Icon {...props} name="close-circle-outline" />;
+const trashCan = (props) => <Icon {...props} name="trash-2-outline" />;
 
 const AllergenList = () => {
-  const [removeItem, setRemoveItem] = useState(null);
+  useEffect(() => {
+    setInterval(function () {
+      getData();
+    }, 2000);
+  }, []);
 
-  const renderItem = ({ item, index }) => (
-    <Layout style={styles.layout}>
-      <ListItem
-        style={styles.listItem}
-        title={item.title}
-        children={
+  const [data, setData] = useState([]);
+
+  //const renderItemIcon = (props) => <Icon {...props} name="person" />;
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("allergens");
+      setData(jsonValue != null ? JSON.parse(jsonValue) : null);
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("allergens", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteItem = async (item) => {
+    if (data.includes(item)) {
+      const newData = data.filter((e) => e !== item);
+      storeData(newData);
+    }
+    getData();
+  };
+
+  const renderItem = () => {
+    return data.map((item) => {
+      return (
+        <Layout key={item} style={styles.listItem}>
+          <Text>{item}</Text>
           <Button
-            style={styles.button}
-            size="small"
-            accessoryRight={close}
+            size="tiny"
+            appearance="ghost"
+            style={styles.listButton}
+            accessoryLeft={trashCan}
             onPress={() => {
-              setRemoveItem(index);
+              deleteItem(item);
             }}
           >
-            {item.title}
+            Ta bort
           </Button>
-        }
-      />
-    </Layout>
-  );
+        </Layout>
+      );
+    });
+  };
 
-  useEffect(() => {
-    if (removeItem !== null) {
-      data.splice(removeItem, 1);
-      setRemoveItem(null);
-    }
-  }, [removeItem]);
+  const test = () => {
+    console.log(data);
+  };
 
-  return (
-    <>
-      {data.length > 0 ? (
-        <List
-          style={styles.container}
-          contentContainerStyle={styles.container2}
-          data={data}
-          numColumns={2}
-          renderItem={renderItem}
-        />
-      ) : (
-        <>
-          <Text category="h6">Du har inte valt någon allergi..</Text>
-          <Text category="s1">Vi visar istället allt vi hittar</Text>
-          <Text category="s2">Vi visar istället allt vi hittar</Text>
-          <Text category="p1">Vi visar istället allt vi hittar</Text>
-          <Text category="p2">Vi visar istället allt vi hittar</Text>
-          <Text category="c1">Vi visar istället allt vi hittar</Text>
-          <Text category="c2">Vi visar istället allt vi hittar</Text>
-        </>
-      )}
-    </>
-  );
+  return <Layout style={styles.allergenList}>{renderItem()}</Layout>;
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  container2: {
-    minWidth: 300,
-    flexDirection: "column",
-    backgroundColor: "white",
+  container: {
     flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingTop: 50,
   },
-  listItem: {},
-  button: {
-    marginHorizontal: 0,
-    marginVertical: 0,
-    paddingHorizontal: 0,
-    paddingVertical: 0,
+  listItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    width: 200,
+    paddingLeft: 10,
+    borderRadius: 10,
   },
   button: {
     backgroundColor: "rgba(50, 159, 91, 0.48)",
+  },
+  allergenList: {
+    minWidth: 250,
+    minHeight: 250,
+    marginTop: 50,
+    color: "green",
+    borderWidth: 2,
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "rgba(219,211,173, 0.3)",
+    borderColor: "rgba(219,211,173, 0.2)",
+    borderRadius: 10,
+    padding: 20,
+  },
+  listButton: {
+    height: 40,
   },
 });
 
