@@ -18,7 +18,7 @@ const Header = (props) => (
 const IntroPage = ({ navigation }) => {
   return (
     <Layout style={Sizing.Screen}>
-      <Card style={styles.card} header={Header}>
+      <Card style={Sizing.Card} header={Header}>
         <AllergenList />
       </Card>
       <QrSearchManually />
@@ -34,13 +34,6 @@ const IntroPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    margin: 2,
-  },
-  listHeader: {
-    padding: 20,
-  },
   button: {
     marginBottom: 20,
   },

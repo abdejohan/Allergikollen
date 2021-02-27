@@ -12,7 +12,7 @@ const ProductScreen = ({ route, navigation }) => {
   const [noProduct, setNoProduct] = useState(false);
   const API_URL = `https://api.dabas.com/DABASService/V2/article/gtin/0${QRCODE}/JSON?apikey=${API_KEY}`;
 
-  const [{ data, loading, error, response }, execute] = useAxios(API_URL);
+  const [{ data, loading, error }, execute] = useAxios(API_URL);
 
   useEffect(() => {
     if (data) {
@@ -20,7 +20,7 @@ const ProductScreen = ({ route, navigation }) => {
         setProduct({
           varumarke: data.Varumarke.Varumarke,
           tillverkare: data.Varumarke.Tillverkare.Namn,
-          img: data.Bilder[0].Lank,
+          ...(data.Bilder[0].Lank !== null && { img: data.Bilder[0].Lank }),
           tillverkningslander: data.Tillverkningslander[0].Land,
           allergener: data.Allergener,
           Ingredienser: data.Ingredienser,
