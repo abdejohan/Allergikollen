@@ -36,13 +36,15 @@ const AllergenList = () => {
         children={
           <Button
             style={styles.button}
-            size="small"
+            size="tiny"
             accessoryRight={close}
             onPress={() => {
               setRemoveItem(index);
             }}
           >
-            {item.title}
+            <Text style={styles.buttonText} category="label">
+              {item.title}
+            </Text>
           </Button>
         }
       />
@@ -60,6 +62,10 @@ const AllergenList = () => {
     <>
       {data.length > 0 ? (
         <List
+          style={{
+            marginHorizontal: -24,
+            marginVertical: -16,
+          }}
           contentContainerStyle={styles.container2}
           data={data}
           numColumns={2}
@@ -80,10 +86,17 @@ const AllergenList = () => {
 const styles = StyleSheet.create({
   container2: {
     flexDirection: "column",
+    flex: 1,
     backgroundColor: "white",
   },
   button: {
     backgroundColor: "rgba(50, 159, 91, 0.48)",
+    borderRadius: 25,
+    borderWidth: 0,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 14,
   },
 });
 

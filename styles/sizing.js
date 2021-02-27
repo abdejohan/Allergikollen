@@ -15,5 +15,6 @@ export const Screen = {
 
 export const Card = {
   flex: 1,
+  minWidth: 280,
   margin: 20,
 };

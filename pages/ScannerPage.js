@@ -15,7 +15,8 @@ const Header = (props) => (
     <Text category="s1">Kollar om varan innehåller</Text>
   </Layout>
 );
-const IntroPage = ({ navigation }) => {
+
+const ScannerPage = ({ navigation }) => {
   return (
     <Layout style={Sizing.Screen}>
       <Card style={Sizing.Card} header={Header}>
@@ -39,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IntroPage;
+export default ScannerPage;
