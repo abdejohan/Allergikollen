@@ -1,56 +1,88 @@
-import React, { useState } from "react";
-import { Input, Button, Icon, Text, Layout } from "@ui-kitten/components";
+import React, { useState, useEffect } from "react";
+import {
+  Input,
+  Button,
+  Icon,
+  Text,
+  Layout,
+  ListItem,
+} from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 import { Sizing } from "../styles/index";
 
-const trashCan = (props) => <Icon {...props} name="trash-2-outline" />;
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const trashCan = (props) => <Icon {...props} name="close-circle-outline" />;
 
-const Settings = (props) => {
+const Settings = () => {
+  useEffect(() => {
+    setInterval(function () {
+      getData();
+    }, 2000);
+  }, []);
   const [newAllergen, setNewAllergen] = useState("");
-  const setSelectedAllergens = props.setSelectedAllergens;
-  const selectedAllergens = props.selectedAllergens;
-  const deleteAllergen = props.deleteAllergen;
-
-  // ICONS
+  const [data, setData] = useState([]);
 
   const handleTextChange = (event) => {
     setNewAllergen(event);
   };
   const addNewAllergen = () => {
     if (newAllergen) {
-      setSelectedAllergens((selectedAllergens) => [
-        ...selectedAllergens,
-        newAllergen.toUpperCase(),
-      ]);
+      let newArray = data;
+      newArray.push(newAllergen);
+      storeData(newArray);
+      setData(newArray);
     }
     setNewAllergen("");
   };
-
-  const deleteItem = (item) => {
-    console.log(item);
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("allergens", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("allergens");
+      setData(jsonValue != null ? JSON.parse(jsonValue) : []);
+      return jsonValue != null ? JSON.parse(jsonValue) : [];
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const showAllergen = (arr) => {
-    if (arr[0]) {
-      return arr.map((item) => {
-        return (
-          <Layout style={styles.listItem}>
-            <Text key={item.id}>{item}</Text>
-            <Button
-              size="tiny"
-              appearance="ghost"
-              style={styles.button}
-              accessoryLeft={trashCan}
-              onPress={() => {
-                deleteAllergen(item);
-              }}
-            >
-              Ta bort
-            </Button>
-          </Layout>
-        );
-      });
+  const deleteAllergen = async (item) => {
+    if (data.includes(item)) {
+      let newArr = data.filter((e) => e !== item);
+      storeData(newArr);
+      setData(newArr);
     }
+  };
+
+  const showAllergen = () => {
+    return data.map((item) => {
+      return (
+        <Layout key={item} style={styles.listItem}>
+          <ListItem
+            style={styles.listItem}
+            title={item.title}
+            children={
+              <Button
+                size="small"
+                style={styles.button}
+                accessoryRight={trashCan}
+                onPress={() => {
+                  deleteAllergen(item);
+                }}
+              >
+                {item}
+              </Button>
+            }
+          />
+        </Layout>
+      );
+    });
   };
 
   return (
@@ -62,8 +94,8 @@ const Settings = (props) => {
       </Text>
 
       <Layout style={styles.allergenList}>
-        {selectedAllergens ? (
-          showAllergen(selectedAllergens)
+        {data[0] !== undefined ? (
+          showAllergen()
         ) : (
           <Text>Du har inga allergier valda än..</Text>
         )}
@@ -80,7 +112,7 @@ const Settings = (props) => {
           style={styles.button}
           appearance="outline"
           size="tiny"
-          onPress={addNewAllergen}
+          onPress={() => addNewAllergen(newAllergen)}
         >
           Lägg till
         </Button>
@@ -119,6 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
+    backgroundColor: "rgba(50, 159, 91, 0.48)",
     height: 40,
   },
   input: {},
