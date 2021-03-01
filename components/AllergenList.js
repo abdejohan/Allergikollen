@@ -23,8 +23,8 @@ const AllergenList = () => {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("allergens");
-      setData(jsonValue != null ? JSON.parse(jsonValue) : null);
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
+      setData(jsonValue != null ? JSON.parse(jsonValue) : []);
+      return jsonValue != null ? JSON.parse(jsonValue) : [];
     } catch (e) {
       console.log(e);
     }
