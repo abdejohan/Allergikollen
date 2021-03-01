@@ -76,22 +76,19 @@ const AllergenList = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
   container2: {
-    minWidth: 300,
     flexDirection: "column",
-    backgroundColor: "white",
     flex: 1,
-  },
-
-  button: {
-    marginHorizontal: 0,
-    marginVertical: 0,
-    paddingHorizontal: 0,
-    paddingVertical: 0,
+    backgroundColor: "white",
   },
   button: {
     backgroundColor: "rgba(50, 159, 91, 0.48)",
+    borderRadius: 25,
+    borderWidth: 0,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 14,
   },
   allergenList: {
     minWidth: 250,

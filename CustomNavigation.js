@@ -15,6 +15,17 @@ import Kundtjanst from "./screens/Kundtjanst";
 import Kontakt from "./screens/Kontakt";
 import Hjalp from "./screens/Hjalp";
 
+/* these options will change the appreance of 
+ the top navigation bar inside every screen/page. 
+ Every navigation bar may also have its own custom options*/
+const sharedOptions = {
+  headerTintColor: "white",
+  headerBackTitleVisible: false,
+  headerStyle: {
+    backgroundColor: "rgba(50, 159, 91, 0.24)",
+  },
+};
+
 const Stack = createStackNavigator();
 
 const HomeScreenNavigator = () => {
@@ -24,13 +35,8 @@ const HomeScreenNavigator = () => {
         name="Home"
         component={Home}
         options={{
+          ...sharedOptions,
           title: "Hem",
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
     </Stack.Navigator>
@@ -46,41 +52,26 @@ const ScannerScreenNavigator = () => {
         name="ScannerPage"
         component={ScannerPage}
         options={{
+          ...sharedOptions,
           title: "Sök produkt",
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
       <Stack.Screen
         name="ProductScreen"
         component={ProductScreen}
         options={{
+          ...sharedOptions,
           title: "Produkt Info",
           headerLeft: null,
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
       <Stack.Screen
         name="OpenScanner"
         component={OpenScanner}
         options={{
+          ...sharedOptions,
           title: "Scanner",
           headerLeft: null,
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
     </Stack.Navigator>
@@ -92,7 +83,14 @@ export { ScannerScreenNavigator }; //
 const SettingsScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          ...sharedOptions,
+          title: "Inställningar",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -106,65 +104,40 @@ const SupportScreenNavigator = () => {
         name="Support"
         component={Support}
         options={{
+          ...sharedOptions,
           title: "Support",
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
       <Stack.Screen
         name="Allergikollen"
         component={Allergikollen}
         options={{
+          ...sharedOptions,
           title: "Allergikollen",
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
       <Stack.Screen
         name="Kundtjanst"
         component={Kundtjanst}
         options={{
+          ...sharedOptions,
           title: "Kundtjänst",
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
       <Stack.Screen
         name="Kontakt"
         component={Kontakt}
         options={{
+          ...sharedOptions,
           title: "Kontakt",
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
       <Stack.Screen
         name="Hjalp"
         component={Hjalp}
         options={{
+          ...sharedOptions,
           title: "Hjälp",
-          headerStyle: {
-            backgroundColor: "rgba(50, 159, 91, 0.24)",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
         }}
       />
     </Stack.Navigator>

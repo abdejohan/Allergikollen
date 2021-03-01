@@ -7,14 +7,12 @@ import { Sizing } from "../styles/index";
 import AllergenList from "../components/AllergenList";
 import QrSearchManually from "../components/QrSearchManually";
 
+// Icon for the "Scanna" Button
 const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 
-const IntroPage = ({ navigation }) => {
+const ScannerPage = ({ navigation }) => {
   return (
     <Layout style={Sizing.Screen}>
-      <Text style={styles.listHeader} status="warning" category="h6">
-        Vi säger till om produkten innehåller:{" "}
-      </Text>
       <AllergenList />
       <QrSearchManually />
       <Button
@@ -29,12 +27,9 @@ const IntroPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  listHeader: {
-    padding: 20,
-  },
   button: {
     marginBottom: 20,
   },
 });
 
-export default IntroPage;
+export default ScannerPage;
