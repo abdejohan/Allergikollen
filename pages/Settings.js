@@ -33,12 +33,6 @@ const Settings = () => {
       console.log(e);
     }
   };
-  const loggAsync = async () => {
-    const test = await AsyncStorage.getItem("allergens")
-      .then((res) => JSON.parse(res))
-      .then((resss) => console.log(resss));
-    return test;
-  };
 
   const handleTextChange = (event) => {
     setNewAllergen(event);

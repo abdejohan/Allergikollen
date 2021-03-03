@@ -15,8 +15,7 @@ const trashCan = (props) => <Icon {...props} name="close-circle-outline" />;
 const AllergenList = () => {
   useEffect(() => {
     getData();
-  }),
-    [value];
+  }, [value]);
   const { value, setValue } = useContext(UserContext);
 
   const getData = async () => {
@@ -24,7 +23,7 @@ const AllergenList = () => {
       const jsonValue = await AsyncStorage.getItem("allergens")
         .then((res) => JSON.parse(res))
         .then((result) => {
-          if (toString(result) !== toString(value)) {
+          if (result != value) {
             setValue(result);
           }
         });
