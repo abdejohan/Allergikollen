@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Input,
   Button,
@@ -9,80 +9,95 @@ import {
 } from "@ui-kitten/components";
 import { StyleSheet } from "react-native";
 import { Sizing } from "../styles/index";
-
+import { UserContext } from "../UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const trashCan = (props) => <Icon {...props} name="close-circle-outline" />;
-
 const Settings = () => {
-  useEffect(() => {
-    setInterval(function () {
-      getData();
-    }, 2000);
-  }, []);
+  const { value, setValue } = useContext(UserContext);
   const [newAllergen, setNewAllergen] = useState("");
-  const [data, setData] = useState([]);
 
-  const handleTextChange = (event) => {
-    setNewAllergen(event);
-  };
-  const addNewAllergen = () => {
-    if (newAllergen) {
-      let newArray = data;
-      newArray.push(newAllergen);
-      storeData(newArray);
-      setData(newArray);
-    }
-    setNewAllergen("");
-  };
-  const storeData = async (value) => {
+  useEffect(() => {
+    getData();
+  }, [value]);
+
+  const getData = async () => {
     try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("allergens", jsonValue);
+      const jsonValue = await AsyncStorage.getItem("allergens");
+      if (JSON.parse(jsonValue) === value) {
+        setValue(jsonValue != null ? JSON.parse(jsonValue) : []);
+      } else {
+        return jsonValue != null ? JSON.parse(jsonValue) : [];
+      }
     } catch (e) {
       console.log(e);
     }
   };
-  const getData = async () => {
+  const loggAsync = async () => {
+    const test = await AsyncStorage.getItem("allergens")
+      .then((res) => JSON.parse(res))
+      .then((resss) => console.log(resss));
+    return test;
+  };
+
+  const handleTextChange = (event) => {
+    setNewAllergen(event);
+  };
+
+  const addNewAllergen = async () => {
+    if (newAllergen) {
+      // Den utkommenterade koden fungerar ej ???
+      /* let newArray = value;
+      newArray.push(newAllergen);*/
+      let newArray = [...value, newAllergen];
+      storeData(newArray);
+      setValue(newArray);
+    }
+    setNewAllergen("");
+  };
+
+  const storeData = async (arr) => {
     try {
-      const jsonValue = await AsyncStorage.getItem("allergens");
-      setData(jsonValue != null ? JSON.parse(jsonValue) : []);
-      return jsonValue != null ? JSON.parse(jsonValue) : [];
+      const jsonValue = JSON.stringify(arr);
+      await AsyncStorage.setItem("allergens", jsonValue);
     } catch (e) {
       console.log(e);
     }
   };
 
   const deleteAllergen = async (item) => {
-    if (data.includes(item)) {
-      let newArr = data.filter((e) => e !== item);
+    if (value.includes(item)) {
+      let newArr = value.filter((e) => e !== item);
       storeData(newArr);
-      setData(newArr);
+      setValue(newArr);
     }
   };
 
   const showAllergen = () => {
-    return data.map((item) => {
-      return (
-        <Layout key={item} style={styles.listItem}>
-          <ListItem
-            style={styles.listItem}
-            title={item.title}
-            children={
-              <Button
-                size="small"
-                style={styles.button}
-                accessoryRight={trashCan}
-                onPress={() => {
-                  deleteAllergen(item);
-                }}
-              >
-                {item}
-              </Button>
-            }
-          />
-        </Layout>
-      );
-    });
+    if (value.length) {
+      return value.map((item) => {
+        return (
+          <Layout key={item} style={styles.listItem}>
+            <ListItem
+              style={styles.listItem}
+              title={item}
+              children={
+                <Button
+                  size="small"
+                  style={styles.button}
+                  accessoryRight={trashCan}
+                  onPress={() => {
+                    deleteAllergen(item);
+                  }}
+                >
+                  {item}
+                </Button>
+              }
+            />
+          </Layout>
+        );
+      });
+    }
   };
 
   return (
@@ -92,9 +107,8 @@ const Settings = () => {
         I Listan nedan bör du lista de allergier som du vill att scannern ska ha
         ett extra öga över.
       </Text>
-
       <Layout style={styles.allergenList}>
-        {data[0] !== undefined ? (
+        {value[0] !== undefined ? (
           showAllergen()
         ) : (
           <Text>Du har inga allergier valda än..</Text>
@@ -112,7 +126,7 @@ const Settings = () => {
           style={styles.button}
           appearance="outline"
           size="tiny"
-          onPress={() => addNewAllergen(newAllergen)}
+          onPress={() => addNewAllergen()}
         >
           Lägg till
         </Button>
