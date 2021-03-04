@@ -24,7 +24,7 @@ const AllergenList = () => {
         .then((res) => JSON.parse(res))
         .then((result) => {
           if (result != value) {
-            setValue(result);
+            setValue(result != null ? result : []);
           }
         });
 
@@ -53,28 +53,30 @@ const AllergenList = () => {
   };
 
   const renderItem = () => {
-    return value.map((item) => {
-      return (
-        <Layout key={item} style={styles.listItem}>
-          <ListItem
-            style={styles.listItem}
-            title={item}
-            children={
-              <Button
-                style={styles.button}
-                size="small"
-                accessoryRight={trashCan}
-                onPress={() => {
-                  deleteItem(item);
-                }}
-              >
-                {item}
-              </Button>
-            }
-          />
-        </Layout>
-      );
-    });
+    if (value !== null) {
+      return value.map((item) => {
+        return (
+          <Layout key={item} style={styles.listItem}>
+            <ListItem
+              style={styles.listItem}
+              title={item}
+              children={
+                <Button
+                  style={styles.button}
+                  size="small"
+                  accessoryRight={trashCan}
+                  onPress={() => {
+                    deleteItem(item);
+                  }}
+                >
+                  {item}
+                </Button>
+              }
+            />
+          </Layout>
+        );
+      });
+    }
   };
 
   return <Layout style={styles.allergenList}>{renderItem()}</Layout>;
