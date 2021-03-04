@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Button,
   Icon,
@@ -9,21 +9,25 @@ import {
 } from "@ui-kitten/components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StyleSheet } from "react-native";
+import { UserContext } from "../UserContext";
 const trashCan = (props) => <Icon {...props} name="close-circle-outline" />;
 
 const AllergenList = () => {
   useEffect(() => {
-    setInterval(function () {
-      getData();
-    }, 2000);
-  }, []);
-
-  const [data, setData] = useState([]);
+    getData();
+  }, [value]);
+  const { value, setValue } = useContext(UserContext);
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("allergens");
-      setData(jsonValue != null ? JSON.parse(jsonValue) : []);
+      const jsonValue = await AsyncStorage.getItem("allergens")
+        .then((res) => JSON.parse(res))
+        .then((result) => {
+          if (result != value) {
+            setValue(result);
+          }
+        });
+
       return jsonValue != null ? JSON.parse(jsonValue) : [];
     } catch (e) {
       console.log(e);
@@ -40,15 +44,16 @@ const AllergenList = () => {
   };
 
   const deleteItem = async (item) => {
-    if (data.includes(item)) {
-      const newData = data.filter((e) => e !== item);
+    if (value.includes(item)) {
+      const newData = value.filter((e) => e !== item);
       storeData(newData);
+      setValue(newData);
     }
     getData();
   };
 
   const renderItem = () => {
-    return data.map((item) => {
+    return value.map((item) => {
       return (
         <Layout key={item} style={styles.listItem}>
           <ListItem
