@@ -1,30 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { ImageBackground, TouchableOpacity, StyleSheet } from "react-native";
 import { Layout, Text } from "@ui-kitten/components";
 import { Sizing } from "../styles/index";
 
 const Home = ({ navigation }) => {
   return (
-    <Layout style={Sizing.Screen}>
-      <Text category="h1">HOME</Text>
-    </Layout>
+    <ImageBackground
+      source={require("../assets/allergikollenbackground.jpeg")}
+      style={styles.homeContainer}
+    >
+      <Text style={styles.headlineContainer} category="h1">
+        Allergikollen
+      </Text>
+      <Text style={styles.messageContainer} category="h5">
+        Välkommen till Allergikollen! Vi hjäper dig att hålla utkik efter ämnen
+        du är allergisk mot.
+      </Text>
+      <Text style={styles.emptyContainer}></Text>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    color: "#000",
-    fontWeight: "700",
-    fontSize: 30,
+  homeContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    // alignItems: "stretch",
   },
-  button: {
-    backgroundColor: "#0275d8",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
+  headlineContainer: {
+    flex: 4,
+    color: "white",
+    textShadowColor: "black",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 25,
+  messageContainer: {
+    flex: 2,
+    color: "white",
+    backgroundColor: "rgba(0,0,0, 0.4)",
+    padding: 20,
+  },
+  emptyContainer: {
+    flex: 1,
+    padding: 20,
   },
 });
 
