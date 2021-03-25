@@ -27,9 +27,6 @@ const ScannerPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    marginBottom: 20,
-  },
 });
 
 export default ScannerPage;
