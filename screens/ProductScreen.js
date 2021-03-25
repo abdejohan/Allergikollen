@@ -154,7 +154,6 @@ const ProductScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    width: "100%",
   },
   img1: {
     alignSelf: "center",
