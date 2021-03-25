@@ -11,6 +11,7 @@ export const Screen = {
   flex: 1,
   justifyContent: "flex-start",
   alignItems: "center",
+  paddingVertical: 20,
 };
 
 export const Card = {
