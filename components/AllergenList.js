@@ -83,40 +83,13 @@ const AllergenList = () => {
 };
 
 const styles = StyleSheet.create({
-  container2: {
-    flexDirection: "column",
-    flex: 1,
-    backgroundColor: "white",
-  },
   button: {
     backgroundColor: "rgba(50, 159, 91, 0.48)",
     borderRadius: 25,
     borderWidth: 0,
   },
-  buttonText: {
-    color: "white",
-    fontSize: 14,
-  },
   allergenList: {
-    minWidth: 50,
-    minHeight: 50,
-    color: "green",
-    flex: 1,
-    borderWidth: 2,
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "rgba(219,211,173, 0.1)",
-    borderColor: "rgba(219,211,173, 0.2)",
-    borderRadius: 10,
-  },
-  listItem: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "transparent",
-    width: 200,
-    paddingLeft: 10,
-    borderRadius: 10,
   },
 });
 
