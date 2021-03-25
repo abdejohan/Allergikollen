@@ -144,8 +144,9 @@ const ProductScreen = ({ route, navigation }) => {
           <Text category="h6">Produkten du har scannat verkar inte finnas hos oss.</Text>
         </View>
       }
-      {contains ? contains.map((element) => <Card key={element} status="danger"><Text>{element}</Text></Card>) : null}
-      {mayContain ? mayContain.map((element) => <Card key={element} status="warning"><Text>{element}</Text></Card>) : null}
+      {contains && contains.map((element) => <Card key={element} header={() => <Text category="h4">Innehåller</Text>} status="danger"><Text>{element}</Text></Card>)}
+      {mayContain && mayContain.map((element) => <Card key={element} header={() => <Text category="h4">Kan innehålla spår av</Text>} status="warning"><Text>{element}</Text></Card>)}
+      {contains.length === 0 && mayContain.length === 0 && <Card status="success"><Text style={{fontSize: 20}}>Finns inga spår av dina allergier!</Text></Card>}
       </Card>
     </ScrollView>
   );
@@ -154,12 +155,13 @@ const ProductScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
+    marginBottom: 40,
   },
   img1: {
     alignSelf: "center",
     margin: 10,
-    width: 220,
-    height: 220,
+    width: 200,
+    height: 200,
     borderWidth: 2,
   },
   footerContainer: {

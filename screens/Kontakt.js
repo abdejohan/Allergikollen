@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Divider, List, ListItem } from "@ui-kitten/components";
+import { StyleSheet, View } from "react-native";
+import { Divider, List, Text, ListItem } from "@ui-kitten/components";
 
 const data = [
   {
@@ -21,11 +21,10 @@ const data = [
 
 const Kontakt = () => {
   const renderItem = ({ item }) => (
-    <ListItem
-      style={styles.listItem}
-      title={item.title}
-      description={item.description}
-    />
+    <View style={styles.listItem}>
+      <Text style={{ fontSize: 20, fontWeight: "bold"}}>{item.title}</Text>
+      <Text style={{ fontSize: 16}}>{item.description}</Text>
+    </View>
   );
 
   return (
@@ -43,7 +42,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listItem: {
+    padding: 20,
     minHeight: 150,
+    alignItems: "flex-start",
+    justifyContent: "center"
   },
 });
 

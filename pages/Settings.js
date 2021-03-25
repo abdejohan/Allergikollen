@@ -8,7 +8,7 @@ import {
   Card,
   ListItem,
 } from "@ui-kitten/components";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
 import { Sizing } from "../styles/index";
 import { UserContext } from "../UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -71,10 +71,9 @@ const Settings = () => {
 
   const Header = (props) => (
     <View {...props}>
-      <Text category="h3">Välj allergi att övervaka</Text>
+      <Text category="h5">Välj allergier</Text>
       <Text category="s1">
-        I Listan nedan bör du lista de allergier som du vill att scannern ska ha
-        ett extra öga över.
+        Lista de allergier som du vill att scannern flagga för
       </Text>
     </View>
   );
@@ -88,25 +87,25 @@ const Settings = () => {
   return (
     <Layout style={Sizing.Screen}>
       <Card style={{ flex: 1}} header={Header}>  
-      <AllergenList />
-        <Layout style={styles.searchBarContainer}>
-          <Input
-            style={styles.input}
-            caption="finns inte din allergi? klicka här"
-            value={newAllergen}
-            onChangeText={(event) => handleTextChange(event)}
-            placeholder="Sök.."
-          ></Input>
-          <Button
-            style={styles.button}
-            appearance="outline"
-            size="tiny"
-            onPress={() => addNewAllergen()}
-          >
-            Lägg till
-          </Button>
-        </Layout>
+        <AllergenList />
       </Card>
+      <Layout style={styles.searchBarContainer}>
+        <Input
+          style={styles.input}
+          caption="finns inte din allergi? klicka här"
+          value={newAllergen}
+          onChangeText={(event) => handleTextChange(event)}
+          placeholder="Sök.."
+        ></Input>
+        <Button
+          style={styles.button}
+          appearance="outline"
+          size="tiny"
+          onPress={() => addNewAllergen()}
+        >
+          Lägg till
+        </Button>
+      </Layout>
     </Layout>
   );
 };
@@ -118,10 +117,9 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   searchBarContainer: {
+    marginTop: 30,
     flexDirection: "row",
     justifyContent: "center",
-    alignSelf: "flex-end",
-    bottom: 0,
   },
   button: {
     backgroundColor: "rgba(50, 159, 91, 0.48)",

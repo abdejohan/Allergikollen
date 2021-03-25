@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   },
   allergenList: {
     flexDirection: "row",
+    flexWrap: "wrap"
   },
 });
 

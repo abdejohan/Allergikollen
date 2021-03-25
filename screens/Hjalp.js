@@ -43,7 +43,7 @@ const Hjalp = () => {
   return (
     <ScrollView>
       <Layout style={Sizing.Screen}>
-        <Card style={Sizing.Card} header={Header} footer={Footer}>
+        <Card style={{marginBottom: 20}} header={Header} footer={Footer}>
           <Text
             style={{ ...Typography.Italic, ...Sizing.padding }}
             category="h6"
@@ -57,14 +57,14 @@ const Hjalp = () => {
             exempel mjölk, hasselnöt och vete. Märkningen får inte...
           </Text>
         </Card>
-        <Card style={Sizing.Card} header={Header1} footer={Footer}>
+        <Card style={{marginBottom: 20}} header={Header1} footer={Footer}>
           <Text category="s1">
             Att märka livsmedel med uppgift om att de är "fria från" ett eller
             flera allergen är frivilligt för företag, men om de gör det så måste
             vissa krav uppfyllas. Bland annat ska uppgiften vara ...
           </Text>
         </Card>
-        <Card style={Sizing.Card} header={Header} footer={Footer}>
+        <Card style={{marginBottom: 20}} header={Header} footer={Footer}>
           <Text category="s1">
             Märkning såsom ”Kan innehålla spår av…” är frivillig att använda för
             företag. Den används för att upplysa personer med bland annat
