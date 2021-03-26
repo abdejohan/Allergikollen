@@ -6,25 +6,25 @@ export const Support = ({ navigation }) => {
     <React.Fragment>
       <Menu>
         <MenuItem
-          title="Om Allergikollen"
+          title={(() => <Text style={{ fontSize: 20}}>Om Allergikollen</Text>)}
           onPress={() => {
             navigation.navigate("Allergikollen");
           }}
         />
         <MenuItem
-          title="Kontakt"
+          title={(() => <Text style={{ fontSize: 20}}>Kontakt</Text>)}
           onPress={() => {
             navigation.navigate("Kontakt");
           }}
         />
         <MenuItem
-          title="Kundtjänst"
+          title={(() => <Text style={{ fontSize: 20}}>Kundtjänst</Text>)}
           onPress={() => {
             navigation.navigate("Kundtjanst");
           }}
         />
         <MenuItem
-          title="Hjälp"
+          title={(() => <Text style={{ fontSize: 20}}>Hjälp</Text>)}
           onPress={() => {
             navigation.navigate("Hjalp");
           }}

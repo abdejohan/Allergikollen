@@ -9,8 +9,16 @@ export const screenSizing = {
 
 export const Screen = {
   flex: 1,
-  justifyContent: "flex-start",
-  alignItems: "center",
+  paddingVertical: 20,
+  paddingHorizontal: 20,
+};
+
+export const ScrollScreen = {
+  flex: 1,
+  paddingVertical: 20,
+  paddingHorizontal: 20,
+  width: screenWidth,
+  height: screenHeight,
 };
 
 export const Card = {

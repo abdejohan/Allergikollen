@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Layout, Text, Icon, Button } from "@ui-kitten/components";
+import { StyleSheet, View } from "react-native";
+import { Layout, Text, Card, Icon, Button } from "@ui-kitten/components";
 import { Sizing } from "../styles/index";
 
 // components
@@ -11,25 +11,34 @@ import QrSearchManually from "../components/QrSearchManually";
 const CameraIcon = (props) => <Icon {...props} name="camera-outline" />;
 
 const ScannerPage = ({ navigation }) => {
+
+  const Header = (props) => (
+    <View {...props}>
+      <Text category="h2">Allergier</Text>
+      <Text category="s1">Flaggar för:</Text>
+    </View>
+  );
+
   return (
     <Layout style={Sizing.Screen}>
-      <AllergenList />
-      <QrSearchManually />
-      <Button
-        style={styles.button}
-        onPress={() => navigation.navigate("OpenScanner")}
-        accessoryRight={CameraIcon}
-      >
-        Scanna
-      </Button>
+      <Card style={{flex: 1}} header={Header}>
+        <AllergenList />
+      </Card>
+      <View style={{paddingHorizontal: 20}}>
+        <QrSearchManually />
+        <Button
+          style={styles.button}
+          onPress={() => navigation.navigate("OpenScanner")}
+          accessoryRight={CameraIcon}
+          >
+          Scanna
+        </Button>
+      </View>
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    marginBottom: 20,
-  },
 });
 
 export default ScannerPage;

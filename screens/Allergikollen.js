@@ -84,7 +84,7 @@ const Allergikollen = () => {
   return (
     <ScrollView style={styles.ScrollView}>
       <Layout style={Sizing.Screen}>
-        <Card style={Sizing.Card} header={Header} footer={Footer}>
+        <Card style={{ marginBottom: 20}} header={Header} footer={Footer}>
           <Text category="s1">
             För dig som är allergisk eller överkänslig mot mat, är det viktigt
             att veta vad maten innehåller. Därför finns särskilda regler för hur
@@ -93,7 +93,7 @@ const Allergikollen = () => {
             på restaurang...
           </Text>
         </Card>
-        <Card style={Sizing.Card} header={Header1} footer={Footer}>
+        <Card style={{ marginBottom: 20}} header={Header1} footer={Footer}>
           <Text category="s1">
             Om en allergisk person får i sig något hon eller han inte tål kan
             det leda till svåra symtom. Det finns inget botemedel för allergi.
